@@ -1,0 +1,762 @@
+﻿{
+    "name":  "Gigawave Blog Generator - Kimi K2.5",
+    "nodes":  [
+                  {
+                      "parameters":  {
+
+                                     },
+                      "id":  "manual-trigger",
+                      "name":  "Manual Trigger",
+                      "type":  "n8n-nodes-base.manualTrigger",
+                      "typeVersion":  1,
+                      "position":  [
+                                       -700,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "topic",
+                                                                           "value":  "Understanding and Fixing Hydration Errors in Next.js"
+                                                                       },
+                                                                       {
+                                                                           "name":  "target_model",
+                                                                           "value":  "@cf/moonshotai/kimi-k2.5"
+                                                                       },
+                                                                       {
+                                                                           "name":  "cloudflare_account_id",
+                                                                           "value":  "={{$env.CLOUDFLARE_ACCOUNT_ID}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "cloudflare_auth_token",
+                                                                           "value":  "={{$env.CLOUDFLARE_AUTH_TOKEN}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "skill_file_content",
+                                                                           "value":  "---\nname: gigawave-kimik25-blog-raw-generator\ndescription: Generate raw technical blog content in Gigawave style from any topic using strict tagged components. Use when the input is a topic (optionally with code snippets, references, or product context) and the output must follow Gigawave blog flow, tone, and reusable section tags for downstream automation.\n---\n\n# Gigawave Kimi/Kimik 2.5 Blog Raw Skill\n\n## Goal\nCreate a full raw blog package for Gigawave that matches the existing style:\n- practical and implementation-first\n- developer pain point -\u003e clear fix\n- step-by-step explanation with usable snippets\n- pro tips, best practices, resources, and concise close\n\nThe topic can change. The content architecture must stay consistent.\n\n## Input Contract\nAccept:\n- `topic` (required)\n- `target_stack` (optional; e.g., Flutter, Next.js, Node, AI)\n- `audience_level` (optional; beginner/intermediate/advanced)\n- `reference_code` (optional)\n- `constraints` (optional; SEO keyword, word count range, CTA preference)\n\nIf optional fields are missing, infer sensible defaults from `topic`.\n\n## Voice + Style Rules (Derived from Existing Gigawave Blogs)\n1. Start with a concrete real-world dev problem, not theory.\n2. Keep tone mentor-like, direct, and practical.\n3. Prefer short sections with clear headings (`####` style).\n4. Use \"Step 1/2/3...\" for implementation when suitable.\n5. Include runnable or realistic code blocks with filename hints.\n6. Add \"Pro Tip\" style callouts where they increase clarity.\n7. Include best-practice bullets and edge-case notes.\n8. End with useful resources + final takeaway.\n9. Avoid fluff, generic hype, and vague claims.\n10. Keep explanations grounded in tradeoffs (what you gain, what breaks if ignored).\n\n## Mandatory Tagged Components\nEvery output must include all core components below exactly once unless marked optional.\nUse these tags exactly as written so downstream systems can parse them.\n\n`[GW_TAG_01_BLOG_IDENTITY]`\n- title\n- slug (kebab-case)\n- primary topic keyword\n- target stack\n\n`[GW_TAG_02_SEO_METADATA]`\n- seoTitle (55-65 chars ideal)\n- metaDescription (140-160 chars ideal)\n- suggestedTags (3-6)\n- suggestedReadTime\n\n`[GW_TAG_03_HERO_HOOK]`\n- 1-2 paragraph hook based on a practical dev pain\n- why this matters now\n\n`[GW_TAG_04_CONTEXT_SETUP]`\n- concise background\n- assumptions/prerequisites\n\n`[GW_TAG_05_PROBLEM_BREAKDOWN]`\n- key failure points/pitfalls\n- symptoms in real projects\n\n`[GW_TAG_06_SOLUTION_OVERVIEW]`\n- chosen approach\n- why this approach over alternatives\n\n`[GW_TAG_07_IMPLEMENTATION_STEPS]`\n- step-by-step sections (`Step 1`, `Step 2`, ...)\n- each step includes short explanation + actionable instruction\n\n`[GW_TAG_08_CODE_SNIPPETS]`\n- list of code blocks with:\n  - `filename`\n  - `language`\n  - `purpose`\n  - `code`\n\n`[GW_TAG_09_CODE_EXPLANATION]`\n- map important code lines/concepts to outcomes\n- include at least one \"what can go wrong\" note\n\n`[GW_TAG_10_VALIDATION_CHECKLIST]`\n- quick checks to confirm implementation works\n- include expected behavior/results\n\n`[GW_TAG_11_EDGE_CASES]`\n- non-happy paths\n- fallback behavior\n\n`[GW_TAG_12_BEST_PRACTICES]`\n- concise do/don\u0027t bullets\n\n`[GW_TAG_13_PRO_TIPS]`\n- short advanced tips (2-5 bullets)\n\n`[GW_TAG_14_RESOURCES]`\n- official docs and high-signal references\n- avoid low-quality sources\n\n`[GW_TAG_15_FINAL_THOUGHTS]`\n- clear conclusion\n- practical next step for reader\n\n`[GW_TAG_16_PREVIEW_CARD_DATA]`\n- previewTitle\n- previewDescription\n- previewDateText\n- previewReadTime\n- previewTags\n\n`[GW_TAG_17_IMAGE_PLAN]` (optional but preferred)\n- hero image idea\n- 2-4 inline visual ideas\n- alt text intent for each\n\n## Output Format (Strict)\nReturn content in this exact top-level order:\n1. `[GW_TAG_01_BLOG_IDENTITY]`\n2. `[GW_TAG_02_SEO_METADATA]`\n3. `[GW_TAG_03_HERO_HOOK]`\n4. `[GW_TAG_04_CONTEXT_SETUP]`\n5. `[GW_TAG_05_PROBLEM_BREAKDOWN]`\n6. `[GW_TAG_06_SOLUTION_OVERVIEW]`\n7. `[GW_TAG_07_IMPLEMENTATION_STEPS]`\n8. `[GW_TAG_08_CODE_SNIPPETS]`\n9. `[GW_TAG_09_CODE_EXPLANATION]`\n10. `[GW_TAG_10_VALIDATION_CHECKLIST]`\n11. `[GW_TAG_11_EDGE_CASES]`\n12. `[GW_TAG_12_BEST_PRACTICES]`\n13. `[GW_TAG_13_PRO_TIPS]`\n14. `[GW_TAG_14_RESOURCES]`\n15. `[GW_TAG_15_FINAL_THOUGHTS]`\n16. `[GW_TAG_16_PREVIEW_CARD_DATA]`\n17. `[GW_TAG_17_IMAGE_PLAN]`\n\nDo not omit tags. If a section is short, still include the tag with concise content.\n\n## Quality Gate Before Final Output\nValidate internally before returning:\n1. All 17 tags exist in correct order.\n2. Content is topic-specific (not template-like filler).\n3. At least 2 meaningful code snippets for technical topics.\n4. Best practices and edge cases are non-generic.\n5. SEO fields are coherent with title and topic.\n6. Final thoughts include one practical next action.\n\n## Generation Prompt Template (for Kimi/Kimik 2.5)\nUse this when invoking the model:\n\n```text\nYou are generating raw technical blog content for Gigawave.\nFollow the skill: gigawave-kimik25-blog-raw-generator.\n\nInput:\n- topic: {{TOPIC}}\n- target_stack: {{STACK_OR_AUTO}}\n- audience_level: {{LEVEL_OR_AUTO}}\n- reference_code: {{OPTIONAL}}\n- constraints: {{OPTIONAL}}\n\nRules:\n- Follow the exact tagged component order and names.\n- Keep tone practical, implementation-first, and developer-centric.\n- Include concrete steps, realistic code, edge cases, and best practices.\n- Avoid fluff and avoid generic high-level text.\n- Ensure SEO metadata and preview data are production-ready.\n```\n"
+                                                                       }
+                                                                   ]
+                                                    }
+                                     },
+                      "id":  "set-config",
+                      "name":  "Set Topic + Skill Content",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -470,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "={{`https://api.cloudflare.com/client/v4/accounts/${$json.cloudflare_account_id}/ai/run/${encodeURIComponent($json.target_model)}`}}",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Authorization",
+                                                                                         "value":  "={{`Bearer ${$json.cloudflare_auth_token}`}}"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "x-session-affinity",
+                                                                                         "value":  "={{`gigawave-blog-${$execution.id}`}}"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "{\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are generating raw technical blog content for Gigawave. Topic lock is mandatory: the blog MUST be exactly about \u0027Understanding and Fixing Hydration Errors in Next.js\u0027. If you cannot comply, return exactly TOPIC_MISMATCH. Output must contain exactly these tags in this order: [GW_TAG_01_BLOG_IDENTITY], [GW_TAG_02_SEO_METADATA], [GW_TAG_03_HERO_HOOK], [GW_TAG_04_CONTEXT_SETUP], [GW_TAG_05_PROBLEM_BREAKDOWN], [GW_TAG_06_SOLUTION_OVERVIEW], [GW_TAG_07_IMPLEMENTATION_STEPS], [GW_TAG_08_CODE_SNIPPETS], [GW_TAG_09_CODE_EXPLANATION], [GW_TAG_10_VALIDATION_CHECKLIST], [GW_TAG_11_EDGE_CASES], [GW_TAG_12_BEST_PRACTICES], [GW_TAG_13_PRO_TIPS], [GW_TAG_14_RESOURCES], [GW_TAG_15_FINAL_THOUGHTS], [GW_TAG_16_PREVIEW_CARD_DATA], [GW_TAG_17_IMAGE_PLAN], [GW_TAG_18_KEY_CONCEPTS]. Never use alternate tags. Never use placeholder text such as \u0027Not provided\u0027, \u0027TBD\u0027, or \u0027coming soon\u0027. Return only final blog content text, no JSON wrapper, no reasoning.\" \n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"SKILL_FILE_CONTENT:\\\\n{{ JSON.stringify($json.skill_file_content).slice(1,-1) }}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"TOPIC:\\\\n{{ JSON.stringify($json.topic).slice(1,-1) }}\"\n    }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 7000,\n  \"chat_template_kwargs\": {\n    \"enable_thinking\": true,\n    \"clear_thinking\": true\n  },\n  \"stream\": false\n}",
+                                         "options":  {
+                                                         "timeout":  180000
+                                                     }
+                                     },
+                      "id":  "call-kimi",
+                      "name":  "Call Kimi K2.5",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       -210,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "topic",
+                                                                           "value":  "={{$item(0).$node[\"Set Topic + Skill Content\"].json[\"topic\"]}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "model",
+                                                                           "value":  "={{$item(0).$node[\"Set Topic + Skill Content\"].json[\"target_model\"]}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "blog_raw_output",
+                                                                           "value":  "={{$json.result?.response || $json.result?.output_text || ($json.choices \u0026\u0026 $json.choices[0] \u0026\u0026 $json.choices[0].message \u0026\u0026 $json.choices[0].message.content) || JSON.stringify($json)}}"
+                                                                       }
+                                                                   ]
+                                                    }
+                                     },
+                      "id":  "format-output",
+                      "name":  "Format Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       40,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "final_blog_output",
+                                                                           "value":  "={{ (() =\u003e { const raw = $json.blog_raw_output || \u0027\u0027; const parsed = (typeof raw === \u0027string\u0027) ? JSON.parse(raw) : raw; const payload = (typeof parsed.result === \u0027string\u0027) ? JSON.parse(parsed.result) : (parsed.result || parsed); return payload?.choices?.[0]?.message?.content || payload?.response || payload?.output_text || \u0027\u0027; })() }}"
+                                                                       }
+                                                                   ]
+                                                    }
+                                     },
+                      "id":  "extract-exact-output",
+                      "name":  "Extract Exact Blog Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       290,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  false,
+                                         "values":  {
+                                                        "boolean":  [
+                                                                        {
+                                                                            "name":  "schema_valid",
+                                                                            "value":  "={{ (() =\u003e { const text = ($json.final_blog_output || \"\").toLowerCase(); const tags = [\"[GW_TAG_01_BLOG_IDENTITY]\",\"[GW_TAG_02_SEO_METADATA]\",\"[GW_TAG_03_HERO_HOOK]\",\"[GW_TAG_04_CONTEXT_SETUP]\",\"[GW_TAG_05_PROBLEM_BREAKDOWN]\",\"[GW_TAG_06_SOLUTION_OVERVIEW]\",\"[GW_TAG_07_IMPLEMENTATION_STEPS]\",\"[GW_TAG_08_CODE_SNIPPETS]\",\"[GW_TAG_09_CODE_EXPLANATION]\",\"[GW_TAG_10_VALIDATION_CHECKLIST]\",\"[GW_TAG_11_EDGE_CASES]\",\"[GW_TAG_12_BEST_PRACTICES]\",\"[GW_TAG_13_PRO_TIPS]\",\"[GW_TAG_14_RESOURCES]\",\"[GW_TAG_15_FINAL_THOUGHTS]\",\"[GW_TAG_16_PREVIEW_CARD_DATA]\",\"[GW_TAG_17_IMAGE_PLAN]\",\"[GW_TAG_18_KEY_CONCEPTS]\"]; let last=-1; for (const tag of tags) { const idx=text.indexOf(tag.toLowerCase()); if (idx===-1 || idx\u003clast) return false; last=idx; } const topicOk = text.includes(\"hydration\") \u0026\u0026 (text.includes(\"next.js\") || text.includes(\"nextjs\")); return topicOk; })() }}"
+                                                                        }
+                                                                    ]
+                                                    }
+                                     },
+                      "id":  "validate-tag-schema",
+                      "name":  "Validate Tag Schema",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       540,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "boolean":  [
+                                                                            {
+                                                                                "value1":  "={{$json.schema_valid}}",
+                                                                                "value2":  true
+                                                                            }
+                                                                        ]
+                                                        }
+                                     },
+                      "id":  "if-schema-valid",
+                      "name":  "Schema Valid?",
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2,
+                      "position":  [
+                                       780,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "={{`https://api.cloudflare.com/client/v4/accounts/${$item(0).$node[\"Set Topic + Skill Content\"].json[\"cloudflare_account_id\"]}/ai/run/${encodeURIComponent($item(0).$node[\"Set Topic + Skill Content\"].json[\"target_model\"])}`}}",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Authorization",
+                                                                                         "value":  "={{`Bearer ${$item(0).$node[\"Set Topic + Skill Content\"].json[\"cloudflare_auth_token\"]}`}}"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "x-session-affinity",
+                                                                                         "value":  "={{`gigawave-blog-retry-${$execution.id}`}}"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "{\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"REGENERATION MODE. Previous output failed validation. Topic lock is mandatory: generate only \u0027Understanding and Fixing Hydration Errors in Next.js\u0027. If output is about any other topic, return exactly TOPIC_MISMATCH. Return plain text only with exactly these tags in this exact order: [GW_TAG_01_BLOG_IDENTITY], [GW_TAG_02_SEO_METADATA], [GW_TAG_03_HERO_HOOK], [GW_TAG_04_CONTEXT_SETUP], [GW_TAG_05_PROBLEM_BREAKDOWN], [GW_TAG_06_SOLUTION_OVERVIEW], [GW_TAG_07_IMPLEMENTATION_STEPS], [GW_TAG_08_CODE_SNIPPETS], [GW_TAG_09_CODE_EXPLANATION], [GW_TAG_10_VALIDATION_CHECKLIST], [GW_TAG_11_EDGE_CASES], [GW_TAG_12_BEST_PRACTICES], [GW_TAG_13_PRO_TIPS], [GW_TAG_14_RESOURCES], [GW_TAG_15_FINAL_THOUGHTS], [GW_TAG_16_PREVIEW_CARD_DATA], [GW_TAG_17_IMAGE_PLAN], [GW_TAG_18_KEY_CONCEPTS]. Never use alternate tags. Never output placeholders (\u0027Not provided\u0027, \u0027TBD\u0027, \u0027coming soon\u0027). No JSON wrappers, no reasoning, no metadata.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"SKILL_FILE_CONTENT:\\\\n{{ JSON.stringify($item(0).$node[\\\"Set Topic + Skill Content\\\"].json[\\\"skill_file_content\\\"]).slice(1,-1) }}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"TOPIC:\\\\n{{ JSON.stringify($item(0).$node[\\\"Set Topic + Skill Content\\\"].json[\\\"topic\\\"]).slice(1,-1) }}\"\n    }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 7000,\n  \"chat_template_kwargs\": {\n    \"enable_thinking\": true,\n    \"clear_thinking\": true\n  },\n  \"stream\": false\n}",
+                                         "options":  {
+                                                         "timeout":  180000
+                                                     }
+                                     },
+                      "id":  "call-kimi-retry",
+                      "name":  "Call Kimi K2.5 Retry",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       1010,
+                                       390
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "final_blog_output",
+                                                                           "value":  "={{ (() =\u003e { const root = (typeof $json === \"string\") ? JSON.parse($json) : $json; const payload = (typeof root.result === \"string\") ? JSON.parse(root.result) : (root.result || root); return payload?.choices?.[0]?.message?.content || payload?.response || payload?.output_text || \"\"; })() }}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "generation_path",
+                                                                           "value":  "retry"
+                                                                       }
+                                                                   ]
+                                                    }
+                                     },
+                      "id":  "extract-retry-output",
+                      "name":  "Extract Retry Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       1240,
+                                       390
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "final_blog_output",
+                                                                           "value":  "={{$json.final_blog_output}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "generation_path",
+                                                                           "value":  "initial"
+                                                                       }
+                                                                   ]
+                                                    }
+                                     },
+                      "id":  "use-initial-output",
+                      "name":  "Use Initial Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       1010,
+                                       140
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "final_blog_output",
+                                                                           "value":  "={{$json.final_blog_output}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "generation_path",
+                                                                           "value":  "={{$json.generation_path || \"initial\"}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "topic",
+                                                                           "value":  "={{$item(0).$node[\"Set Topic + Skill Content\"].json[\"topic\"]}}"
+                                                                       }
+                                                                   ]
+                                                    }
+                                     },
+                      "id":  "final-output",
+                      "name":  "Final Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       1490,
+                                       260
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const text = ($json.final_blog_output || \"\").trim();\nconst tagNames = [\n  \"GW_TAG_01_BLOG_IDENTITY\",\"GW_TAG_02_SEO_METADATA\",\"GW_TAG_03_HERO_HOOK\",\"GW_TAG_04_CONTEXT_SETUP\",\n  \"GW_TAG_05_PROBLEM_BREAKDOWN\",\"GW_TAG_06_SOLUTION_OVERVIEW\",\"GW_TAG_07_IMPLEMENTATION_STEPS\",\"GW_TAG_08_CODE_SNIPPETS\",\n  \"GW_TAG_09_CODE_EXPLANATION\",\"GW_TAG_10_VALIDATION_CHECKLIST\",\"GW_TAG_11_EDGE_CASES\",\"GW_TAG_12_BEST_PRACTICES\",\n  \"GW_TAG_13_PRO_TIPS\",\"GW_TAG_14_RESOURCES\",\"GW_TAG_15_FINAL_THOUGHTS\",\"GW_TAG_16_PREVIEW_CARD_DATA\",\"GW_TAG_17_IMAGE_PLAN\",\"GW_TAG_18_KEY_CONCEPTS\"\n];\n\nconst sections = {};\nfor (let i = 0; i \u003c tagNames.length; i++) {\n  const open = `[${tagNames[i]}]`;\n  const start = text.indexOf(open);\n  if (start === -1) continue;\n  const contentStart = start + open.length;\n  let end = text.length;\n  for (let j = i + 1; j \u003c tagNames.length; j++) {\n    const next = text.indexOf(`[${tagNames[j]}]`, contentStart);\n    if (next !== -1) { end = next; break; }\n  }\n  sections[tagNames[i]] = text.slice(contentStart, end).trim();\n}\n\nreturn [{ json: { ...$json, sections, parsed_tag_count: Object.keys(sections).length } }];"
+                                     },
+                      "id":  "b8d4f3d9-1f65-4adf-b844-3f7d9a63f001",
+                      "name":  "Parse GW Tags",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       14528,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const s = $json.sections || {};\nconst get = (k) =\u003e (s[k] || \"\").trim();\n\nconst parseKV = (block) =\u003e {\n  const out = {};\n  (block || \"\").split(\"\\n\").forEach((line) =\u003e {\n    const m = line.match(/^\\s*[-*]?\\s*([A-Za-z0-9 _-]+?)\\s*:\\s*(.+)\\s*$/);\n    if (m) out[m[1].trim().toLowerCase()] = m[2].trim();\n  });\n  return out;\n};\n\nconst bullets = (block) =\u003e (block || \"\")\n  .split(\"\\n\")\n  .map(x =\u003e x.trim())\n  .filter(x =\u003e /^-\\s+/.test(x))\n  .map(x =\u003e x.replace(/^-\\s+/, \"\").trim());\n\nconst paragraphs = (block) =\u003e (block || \"\")\n  .split(/\\n\\n+/)\n  .map(x =\u003e x.trim())\n  .filter(Boolean);\n\nconst identity = parseKV(get(\"GW_TAG_01_BLOG_IDENTITY\"));\nconst seo = parseKV(get(\"GW_TAG_02_SEO_METADATA\"));\n\nlet title = identity[\"title\"] || \"\";\nlet slug = identity[\"slug\"] || \"\";\nif (!slug \u0026\u0026 title) slug = title.toLowerCase().replace(/[^a-z0-9]+/g, \"-\").replace(/^-+|-+$/g, \"\");\n\nconst readTimeRaw = seo[\"suggestedreadtime\"] || seo[\"readtime\"] || \"8\";\nconst readTime = (readTimeRaw.match(/\\d+/) || [\"8\"])[0];\n\nconst hero = paragraphs(get(\"GW_TAG_03_HERO_HOOK\"));\nconst context = paragraphs(get(\"GW_TAG_04_CONTEXT_SETUP\"));\nconst problem = bullets(get(\"GW_TAG_05_PROBLEM_BREAKDOWN\"));\nconst solution = paragraphs(get(\"GW_TAG_06_SOLUTION_OVERVIEW\"));\nconst steps = (get(\"GW_TAG_07_IMPLEMENTATION_STEPS\") || \"\")\n  .split(\"\\n\")\n  .map(x =\u003e x.trim())\n  .filter(x =\u003e /^(\\*\\*\\s*)?step\\s+\\d+/i.test(x) || /^-\\s+/.test(x))\n  .map(x =\u003e x.replace(/^[-*\\s]+/, \"\").trim());\n\nconst best = bullets(get(\"GW_TAG_12_BEST_PRACTICES\"));\nconst tips = bullets(get(\"GW_TAG_13_PRO_TIPS\"));\nconst finalThoughts = paragraphs(get(\"GW_TAG_15_FINAL_THOUGHTS\"));\n\nconst codeRegex = /```([a-zA-Z0-9_+-]*)\\n([\\s\\S]*?)```/g;\nconst codeRaw = get(\"GW_TAG_08_CODE_SNIPPETS\");\nconst codeBlocks = [];\nlet m;\nwhile ((m = codeRegex.exec(codeRaw)) !== null) {\n  codeBlocks.push({ language: (m[1] || \"text\").trim() || \"text\", code: (m[2] || \"\").trim() });\n}\n\nconst resRaw = get(\"GW_TAG_14_RESOURCES\");\nconst resources = [];\nconst mdLink = /\\[([^\\]]+)\\]\\(([^)]+)\\)/g;\nlet l;\nwhile ((l = mdLink.exec(resRaw)) !== null) resources.push({ label: l[1].trim(), href: l[2].trim() });\n\nconst kcRaw = get(\"GW_TAG_18_KEY_CONCEPTS\");\nlet conceptsTitle = \"Key Concepts Covered\";\nlet conceptItems = [];\nlet highlightTokens = [];\nif (kcRaw) {\n  const lines = kcRaw.split(\"\\n\").map(x =\u003e x.trim()).filter(Boolean);\n  let mode = \"items\";\n  for (const line of lines) {\n    const st = line.match(/^[-*]?\\s*sectionTitle\\s*:\\s*(.+)$/i);\n    if (st) { conceptsTitle = st[1].trim(); continue; }\n    if (/^[-*]?\\s*items\\s*:/i.test(line)) { mode = \"items\"; continue; }\n    if (/^[-*]?\\s*highlightTokens\\s*:/i.test(line)) { mode = \"tokens\"; continue; }\n    if (/^-\\s+/.test(line)) {\n      const v = line.replace(/^-\\s+/, \"\").trim();\n      if (mode === \"tokens\") highlightTokens.push(v.replace(/^`|`$/g, \"\"));\n      else conceptItems.push(v);\n    }\n  }\n}\nif (!conceptItems.length) {\n  conceptItems = [\n    \"Use deterministic server-client rendering and validate in production mode.\",\n    \"Isolate browser-only APIs behind useEffect.\",\n    \"Use dynamic imports with ssr:false for browser-only widgets.\"\n  ];\n}\nif (!highlightTokens.length) {\n  const tokenSet = new Set();\n  conceptItems.forEach((item) =\u003e {\n    const matches = item.match(/`([^`]+)`/g) || [];\n    matches.forEach((m) =\u003e tokenSet.add(m.replace(/`/g, \"\")));\n  });\n  highlightTokens = Array.from(tokenSet);\n}\n\nconst safeBase = (slug || title || \"Generated Blog\").replace(/[^a-zA-Z0-9 ]/g, \" \").split(/\\s+/).filter(Boolean);\nconst componentName = (safeBase.length ? safeBase : [\"Generated\",\"Blog\"]).map(x =\u003e x[0].toUpperCase() + x.slice(1)).join(\"\") + \"Page\";\n\nreturn [{\n  json: {\n    ...$json,\n    title,\n    slug,\n    readTime,\n    componentName,\n    hero,\n    context,\n    problem,\n    solution,\n    steps,\n    best,\n    tips,\n    finalThoughts,\n    codeBlocks,\n    resources,\n    conceptsTitle,\n    conceptItems,\n    highlightTokens,\n  }\n}];"
+                                     },
+                      "id":  "7a4e66f0-7d46-4c3d-ae84-2ddfd4f99602",
+                      "name":  "Map Tags To TSX Model",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       14768,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const d = $json;\n\nconst q = (v) =\u003e JSON.stringify(String(v ?? \"\"));\nconst esc = (s) =\u003e String(s || \"\")\n  .replace(/\u0026/g, \"\u0026amp;\")\n  .replace(/\u003c/g, \"\u0026lt;\")\n  .replace(/\u003e/g, \"\u0026gt;\")\n  .replace(/\\{/g, \"\u0026#123;\")\n  .replace(/\\}/g, \"\u0026#125;\");\n\nconst para = (arr) =\u003e (arr || []).map((p) =\u003e `\\n        \u003cBlogContent\u003e{${q(p)}}\u003c/BlogContent\u003e`).join(\"\");\n\nconst ext = (lang) =\u003e {\n  const m = { typescript: \u0027ts\u0027, javascript: \u0027js\u0027, tsx: \u0027tsx\u0027, jsx: \u0027jsx\u0027, bash: \u0027sh\u0027, shell: \u0027sh\u0027, dart: \u0027dart\u0027, rust: \u0027rs\u0027, python: \u0027py\u0027, json: \u0027json\u0027, yaml: \u0027yml\u0027, toml: \u0027toml\u0027 };\n  const key = String(lang || \u0027txt\u0027).toLowerCase();\n  return m[key] || key.replace(/[^a-z0-9]/g, \u0027\u0027) || \u0027txt\u0027;\n};\n\nconst tokenize = (line, tokens) =\u003e {\n  if (!tokens || !tokens.length) return esc(line);\n  let out = esc(line);\n  tokens\n    .filter(Boolean)\n    .sort((a, b) =\u003e b.length - a.length)\n    .forEach((t) =\u003e {\n      const safe = t.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$\u0026\");\n      const re = new RegExp(`(${safe})`, \"g\");\n      out = out.replace(re, `\u003cBlogHighlighter\u003e$1\u003c/BlogHighlighter\u003e`);\n    });\n  return out;\n};\n\nconst conceptItemsJsx = (d.conceptItems || []).length\n  ? d.conceptItems.map((line, i) =\u003e `\u003cReact.Fragment key={${q(`ci-${i}`)}}\u003e${tokenize(line, d.highlightTokens || [])}\u003c/React.Fragment\u003e`).join(\",\\n              \")\n  : `\u003cReact.Fragment key=\\\"ci-0\\\"\u003eUse \u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e for browser APIs.\u003c/React.Fragment\u003e`;\n\nconst conceptChips = (d.highlightTokens || []).length\n  ? d.highlightTokens.map((t, i) =\u003e `\u003cspan key={${q(String(i))}} className=\\\"inline-flex\\\"\u003e\u003cBlogHighlighter\u003e${esc(t)}\u003c/BlogHighlighter\u003e\u003c/span\u003e`).join(\"\\n            \")\n  : `\u003cspan key=\\\"0\\\" className=\\\"inline-flex\\\"\u003e\u003cBlogHighlighter\u003eHydration\u003c/BlogHighlighter\u003e\u003c/span\u003e`;\n\nconst resourceItems = (d.resources || []).length\n  ? d.resources.map((r, i) =\u003e `\u003cLink key={${q(String(i))}} href={${q(r.href)}} target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" className=\\\"text-sky-400 hover:text-sky-600\\\"\u003e${esc(r.label)}\u003c/Link\u003e`).join(\",\\n            \")\n  : `\u003cLink key=\\\"0\\\" href=\\\"https://nextjs.org/docs\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" className=\\\"text-sky-400 hover:text-sky-600\\\"\u003eNext.js Docs\u003c/Link\u003e`;\n\nconst stepItems = (d.steps || []).length ? d.steps : [\"Step 1: Implement solution\"];\nconst codeBlocks = d.codeBlocks || [];\nconst pairedCount = Math.min(stepItems.length, codeBlocks.length);\nconst interleavedStepCode = Array.from({ length: pairedCount }).map((_, i) =\u003e {\n  const step = stepItems[i];\n  const block = codeBlocks[i];\n  const stepTitle = String(step).replace(/^[-*\\s]+/, \"\").trim();\n  return `\\n        \u003cBlogSubTitle\u003e{${q(stepTitle)}}\u003c/BlogSubTitle\u003e\\n        \u003cCodeBlock\\n          language=${q(block.language || \"text\")}\\n          filename=${q(`snippet-${i + 1}.${ext(block.language)}`)}\\n          code={${q(block.code || \"\")}}\\n        /\u003e`;\n}).join(\"\\n\");\n\nconst remainingStepItems = stepItems.slice(pairedCount);\nconst remainingStepsBlock = remainingStepItems.length\n  ? `\\n        \u003cBlogSubTitle\u003eAdditional Implementation Notes\u003c/BlogSubTitle\u003e\\n        \u003cBlogList items={[\\n              ${remainingStepItems.map((x) =\u003e q(x)).join(\",\\\\n              \")}\\n        ]} /\u003e`\n  : \"\";\n\nconst listItems = (arr) =\u003e (arr \u0026\u0026 arr.length ? arr.map((x) =\u003e q(x)).join(\",\\n              \") : q(\"Use deterministic server-client rendering and validate in production mode.\"));\n\nconst title = d.title || \"Generated Blog\";\nconst component = d.componentName || \"GeneratedBlogPage\";\n\nconst tsx = `\"use client\";\nimport { BlogContent, BlogHighlighter, BlogList, BlogSubTitle, BlogTips, WriterInfo } from \"@/app/components/BlogComponents\";\nimport CustomTitle from \"@/components/custom/CustomTitle\";\nimport { CodeBlock } from \"@/components/ui/code-block\";\nimport { BLOG_AUTHORS, BLOG_PREVIEWS } from \"@/lib/constants\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport React from \"react\";\nimport RelatedNextBlogButton from \"@/app/components/RelatedNextBlogButton\";\nimport TagsList from \"@/components/custom/TagsList\";\n\nconst ${component} = () =\u003e {\n  const author = BLOG_AUTHORS[1];\n  const pathname = usePathname().split(\"/\")[2];\n  const tags = BLOG_PREVIEWS.find((blog) =\u003e blog.slug === pathname)?.tags || [];\n\n  return (\n    \u003cdiv className=\"min-h-screen text-white p-6 md:p-10 leading-relaxed\"\u003e\n      \u003cdiv className=\"max-w-4xl mx-auto space-y-8\"\u003e\n        \u003cheader className=\"md:my-10\"\u003e\n          \u003cTagsList tags={tags} /\u003e\n          \u003cCustomTitle headingClassName=\"!text-start\" heading={\u003c\u003e{${q(title)}}\u003c/\u003e} /\u003e\n          \u003cWriterInfo image={author.image} name={author.name} role={author.role} readTime={${q(d.readTime || \"8\")}} date=\"June 14, 2025\" /\u003e\n        \u003c/header\u003e${para(d.hero)}\n\n        \u003cBlogSubTitle\u003e{${q(d.conceptsTitle || \"Key Concepts Covered\")}}\u003c/BlogSubTitle\u003e\n        \u003cdiv className=\"flex flex-wrap gap-2\"\u003e\n            ${conceptChips}\n        \u003c/div\u003e\n        \u003cBlogList items={[\n              ${conceptItemsJsx}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eContext Setup\u003c/BlogSubTitle\u003e${para(d.context)}\n\n        \u003cBlogSubTitle\u003eProblem Breakdown\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.problem)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eSolution Overview\u003c/BlogSubTitle\u003e${para(d.solution)}\n${interleavedStepCode}${remainingStepsBlock}\n\n        \u003cBlogSubTitle\u003eBest Practices\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.best)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003ePro Tips\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.tips)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eResources\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n            ${resourceItems}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eFinal Thoughts\u003c/BlogSubTitle\u003e${para(d.finalThoughts)}\n\n        \u003cBlogTips title=\"Pro Tip\" description=\"Validate generated TSX before writing to disk.\" /\u003e\n        \u003cRelatedNextBlogButton currentSlug={pathname} currentTags={tags} /\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default ${component};\n`;\n\nreturn [{ json: { ...$json, tsx_file_content: tsx } }];"
+                                     },
+                      "id":  "0d8f18d5-8ed4-4dc1-b2bb-434a4b870003",
+                      "name":  "Render TSX Template",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       15008,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const code = ($json.tsx_file_content || \"\").toLowerCase();\nconst title = ($json.title || \"\").trim();\nconst slug = ($json.slug || \"\").trim();\nconst componentName = ($json.componentName || \"\").trim();\n\nconst errors = [];\n\nif (!code.includes(\u0027\"use client\";\u0027)) errors.push(\"Missing use client\");\nif (!/const\\s+[a-z0-9_]+\\s*=\\s*\\(\\)\\s*=\u003e/i.test(code)) errors.push(\"Missing component declaration\");\nif (!/export\\s+default\\s+[a-z0-9_]+;/i.test(code)) errors.push(\"Missing default export\");\nif (code.includes(\"d.title\")) errors.push(\"Unresolved template variable\");\nif ((code.match(/\\{/g) || []).length !== (code.match(/\\}/g) || []).length) errors.push(\"Unbalanced braces\");\nif ((code.match(/\\(/g) || []).length !== (code.match(/\\)/g) || []).length) errors.push(\"Unbalanced parentheses\");\n\nif (!title || !slug) errors.push(\"Missing title/slug extraction\");\nif (slug.toLowerCase() === \"generated-blog\") errors.push(\"Fallback slug in use\");\nif (componentName.toLowerCase() === \"generatedblogpage\") errors.push(\"Fallback component in use\");\nif (/not provided/i.test(code)) errors.push(\"Placeholder content present\");\n\nconst topicOk = code.includes(\"hydration\") \u0026\u0026 (code.includes(\"next.js\") || code.includes(\"nextjs\"));\nif (!topicOk) errors.push(\"Topic mismatch\");\n\nreturn [{ json: { ...$json, tsx_valid: errors.length === 0, tsx_errors: errors } }];"
+                                     },
+                      "id":  "f0c1df86-cc52-44d7-8dc2-f1f9355f3004",
+                      "name":  "Validate TSX Output",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       15248,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "topic",
+                                                                           "value":  "={{$json.topic || $item(0).$node[\"Set Topic + Skill Content\"].json[\"topic\"]}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "tsx_slug",
+                                                                           "value":  "={{$json.slug || \"generated-blog\"}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "tsx_component_name",
+                                                                           "value":  "={{$json.componentName || \"GeneratedBlogPage\"}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "tsx_file_content",
+                                                                           "value":  "={{$json.tsx_file_content}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "tsx_errors_json",
+                                                                           "value":  "={{JSON.stringify($json.tsx_errors || [])}}"
+                                                                       }
+                                                                   ],
+                                                        "boolean":  [
+                                                                        {
+                                                                            "name":  "tsx_valid",
+                                                                            "value":  "={{$json.tsx_valid === true}}"
+                                                                        }
+                                                                    ]
+                                                    },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "2f54e3e2-2baf-4d5f-9f3d-11c8930ec005",
+                      "name":  "Deterministic TSX Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       15488,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "let s = $json.tsx_file_content || \"\";\ntry {\n  if (typeof s === \"string\" \u0026\u0026 s.startsWith(\u0027\"\u0027) \u0026\u0026 s.endsWith(\u0027\"\u0027)) s = JSON.parse(s);\n} catch (_) {}\nreturn [{ json: { ...$json, tsx_raw: s } }];"
+                                     },
+                      "id":  "c31a3e81-a89f-46e0-bec8-3ce8f2696001",
+                      "name":  "Decode TSX Raw",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       15728,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "boolean":  [
+                                                                            {
+                                                                                "value1":  "={{ (() =\u003e { const s = String($json.tsx_raw || $json.tsx_file_content || \"\").toLowerCase(); const noPlaceholder = !s.includes(\"not provided\"); const topicOk = s.includes(\"hydration\") \u0026\u0026 (s.includes(\"next.js\") || s.includes(\"nextjs\")); const slugOk = String($json.tsx_slug || \"\").toLowerCase() !== \"generated-blog\"; const compOk = String($json.tsx_component_name || \"\").toLowerCase() !== \"generatedblogpage\"; return ($json.tsx_valid === true) \u0026\u0026 noPlaceholder \u0026\u0026 topicOk \u0026\u0026 slugOk \u0026\u0026 compOk; })() }}",
+                                                                                "value2":  true
+                                                                            }
+                                                                        ]
+                                                        },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "d5f057f3-dd54-4273-9de6-5948f45862ee",
+                      "name":  "TSX Production Ready?",
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2,
+                      "position":  [
+                                       15968,
+                                       -1232
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "value":  "={{$json.tsx_slug || $json.slug || \"generated-blog\"}}",
+                                                                           "name":  "slug"
+                                                                       },
+                                                                       {
+                                                                           "value":  "={{$json.tsx_component_name || $json.componentName || \"GeneratedBlogPage\"}}",
+                                                                           "name":  "component_name"
+                                                                       },
+                                                                       {
+                                                                           "value":  "tsx",
+                                                                           "name":  "language"
+                                                                       },
+                                                                       {
+                                                                           "value":  "={{($json.tsx_component_name || $json.componentName || \"GeneratedBlogPage\") + \".tsx\"}}",
+                                                                           "name":  "file_name"
+                                                                       },
+                                                                       {
+                                                                           "value":  "={{\"app/blogs/\" + ($json.tsx_slug || $json.slug || \"generated-blog\") + \"/components/\" + ($json.tsx_component_name || $json.componentName || \"GeneratedBlogPage\") + \".tsx\"}}",
+                                                                           "name":  "file_path"
+                                                                       },
+                                                                       {
+                                                                           "value":  "={{$json.tsx_raw || $json.tsx_file_content || \"\"}}",
+                                                                           "name":  "code"
+                                                                       }
+                                                                   ]
+                                                    },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "e7bc3bb4-8fd8-4a2d-852d-2c13804d94fb",
+                      "name":  "Production Output",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       16208,
+                                       -1344
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "keepOnlySet":  true,
+                                         "values":  {
+                                                        "string":  [
+                                                                       {
+                                                                           "name":  "status",
+                                                                           "value":  "FAILED_VALIDATION"
+                                                                       },
+                                                                       {
+                                                                           "name":  "topic",
+                                                                           "value":  "={{$json.topic}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "tsx_errors_json",
+                                                                           "value":  "={{$json.tsx_errors_json}}"
+                                                                       },
+                                                                       {
+                                                                           "name":  "note",
+                                                                           "value":  "Fix upstream blog generation (tags/topic/placeholders) and re-run."
+                                                                       }
+                                                                   ]
+                                                    },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "b27510c8-e842-48da-a6f9-bd191d42c85d",
+                      "name":  "Production Error",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  2,
+                      "position":  [
+                                       16208,
+                                       -1120
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const topic = $json.topic || \"Understanding and Fixing Hydration Errors in Next.js\";\nconst tsx = `\"use client\";\nimport { BlogContent, BlogHighlighter, BlogList, BlogSubTitle, BlogTips, WriterInfo } from \"@/app/components/BlogComponents\";\nimport CustomTitle from \"@/components/custom/CustomTitle\";\nimport { CodeBlock } from \"@/components/ui/code-block\";\nimport { BLOG_AUTHORS, BLOG_PREVIEWS } from \"@/lib/constants\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport React from \"react\";\nimport RelatedNextBlogButton from \"@/app/components/RelatedNextBlogButton\";\nimport TagsList from \"@/components/custom/TagsList\";\n\nconst NextjsHydrationErrorsFixPage = () =\u003e {\n  const author = BLOG_AUTHORS[1];\n  const pathname = usePathname().split(\"/\")[2];\n  const tags = BLOG_PREVIEWS.find((blog) =\u003e blog.slug === pathname)?.tags || [];\n\n  return (\n    \u003cdiv className=\"min-h-screen text-white p-6 md:p-10 leading-relaxed\"\u003e\n      \u003cdiv className=\"max-w-4xl mx-auto space-y-8\"\u003e\n        \u003cheader className=\"md:my-10\"\u003e\n          \u003cTagsList tags={tags} /\u003e\n          \u003cCustomTitle headingClassName=\"!text-start\" heading={\u003c\u003e{\"Understanding and Fixing Hydration Errors in Next.js\"}\u003c/\u003e} /\u003e\n          \u003cWriterInfo image={author.image} name={author.name} role={author.role} readTime={\"8\"} date=\"June 14, 2025\" /\u003e\n        \u003c/header\u003e\n\n        \u003cBlogContent\u003e{\"Hydration errors happen when server-rendered HTML differs from the first client render.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogSubTitle\u003eKey Concepts Covered\u003c/BlogSubTitle\u003e\n        \u003cdiv className=\"flex flex-wrap gap-2\"\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003eHydration\u003c/BlogHighlighter\u003e\u003c/span\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e\u003c/span\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003edynamic import\u003c/BlogHighlighter\u003e\u003c/span\u003e\n        \u003c/div\u003e\n        \u003cBlogList items={[\n          \u003c\u003eUse \u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e for browser-only APIs.\u003c/\u003e,\n          \u003c\u003eKeep server and client render output deterministic.\u003c/\u003e,\n          \u003c\u003eUse \u003cBlogHighlighter\u003essr: false\u003c/BlogHighlighter\u003e for browser-only widgets.\u003c/\u003e\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eContext Setup\u003c/BlogSubTitle\u003e\n        \u003cBlogContent\u003e{\"React hydration expects identical initial markup from server and client.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogSubTitle\u003eSolution Overview\u003c/BlogSubTitle\u003e\n        \u003cBlogContent\u003e{\"Fix mismatches by deferring browser-only logic and stabilizing first render.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogSubTitle\u003eStep 1: Move browser-only access to useEffect\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock\n          language=\"typescript\"\n          filename=\"snippet-1.tsx\"\n          code={`\"use client\";\nimport { useEffect, useState } from \"react\";\n\nexport default function WidthInfo() {\n  const [width, setWidth] = useState\u003cnumber | null\u003e(null);\n  useEffect(() =\u003e {\n    const update = () =\u003e setWidth(window.innerWidth);\n    update();\n    window.addEventListener(\"resize\", update);\n    return () =\u003e window.removeEventListener(\"resize\", update);\n  }, []);\n  return \u003cdiv\u003e{width === null ? \"Loading...\" : `Width: ${width}`}\u003c/div\u003e;\n}`}\n        /\u003e\n\n        \u003cBlogSubTitle\u003eStep 2: Isolate browser-only component with dynamic import\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock\n          language=\"typescript\"\n          filename=\"snippet-2.tsx\"\n          code={`import dynamic from \"next/dynamic\";\nconst Chart = dynamic(() =\u003e import(\"./Chart\"), { ssr: false });\nexport default function DashboardChart() { return \u003cChart /\u003e; }`}\n        /\u003e\n\n        \u003cBlogSubTitle\u003eBest Practices\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n          \"Keep initial render deterministic\",\n          \"Avoid window/document/localStorage in server render\",\n          \"Validate in production mode\"\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eResources\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n          \u003cLink key=\"0\" href=\"https://nextjs.org/docs/messages/react-hydration-error\" target=\"_blank\" rel=\"noopener noreferrer\" className=\"text-sky-400 hover:text-sky-600\"\u003eNext.js Hydration Error Docs\u003c/Link\u003e\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eFinal Thoughts\u003c/BlogSubTitle\u003e\n        \u003cBlogContent\u003e{\"Treat hydration warnings as architectural signals and fix root causes early.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogTips title=\"Pro Tip\" description=\"Treat hydration warnings as release blockers for critical pages.\" /\u003e\n        \u003cRelatedNextBlogButton currentSlug={pathname} currentTags={tags} /\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default NextjsHydrationErrorsFixPage;\n`;\n\nreturn [{\n  json: {\n    ...$json,\n    topic,\n    tsx_slug: \"nextjs-hydration-errors-fix\",\n    tsx_component_name: \"NextjsHydrationErrorsFixPage\",\n    tsx_raw: tsx,\n    tsx_file_content: tsx,\n    tsx_valid: true,\n    tsx_errors_json: \"[]\",\n    generation_path: \"fallback_deterministic\"\n  }\n}];"
+                                     },
+                      "id":  "a0f2e0a2-72a8-4540-b24b-145f0d4e7001",
+                      "name":  "Fallback Hydration TSX",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       16208,
+                                       -1120
+                                   ]
+                  }
+              ],
+    "connections":  {
+                        "Use Initial Output":  {
+                                                   "main":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "Final Output",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                               },
+                        "Extract Retry Output":  {
+                                                     "main":  [
+                                                                  [
+                                                                      {
+                                                                          "node":  "Final Output",
+                                                                          "type":  "main",
+                                                                          "index":  0
+                                                                      }
+                                                                  ]
+                                                              ]
+                                                 },
+                        "Call Kimi K2.5 Retry":  {
+                                                     "main":  [
+                                                                  [
+                                                                      {
+                                                                          "node":  "Extract Retry Output",
+                                                                          "type":  "main",
+                                                                          "index":  0
+                                                                      }
+                                                                  ]
+                                                              ]
+                                                 },
+                        "Schema Valid?":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "Use Initial Output",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ],
+                                                           [
+                                                               {
+                                                                   "node":  "Call Kimi K2.5 Retry",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ]
+                                                       ]
+                                          },
+                        "Validate Tag Schema":  {
+                                                    "main":  [
+                                                                 [
+                                                                     {
+                                                                         "node":  "Schema Valid?",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                             ]
+                                                },
+                        "Extract Exact Blog Output":  {
+                                                          "main":  [
+                                                                       [
+                                                                           {
+                                                                               "node":  "Validate Tag Schema",
+                                                                               "type":  "main",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                                   ]
+                                                      },
+                        "Format Output":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "Extract Exact Blog Output",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ]
+                                                       ]
+                                          },
+                        "Call Kimi K2.5":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Format Output",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "Set Topic + Skill Content":  {
+                                                          "main":  [
+                                                                       [
+                                                                           {
+                                                                               "node":  "Call Kimi K2.5",
+                                                                               "type":  "main",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                                   ]
+                                                      },
+                        "Manual Trigger":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Set Topic + Skill Content",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "Final Output":  {
+                                             "main":  [
+                                                          [
+                                                              {
+                                                                  "node":  "Parse GW Tags",
+                                                                  "type":  "main",
+                                                                  "index":  0
+                                                              }
+                                                          ]
+                                                      ]
+                                         },
+                        "Parse GW Tags":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "Map Tags To TSX Model",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ]
+                                                       ]
+                                          },
+                        "Map Tags To TSX Model":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Render TSX Template",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                               ]
+                                                  },
+                        "Render TSX Template":  {
+                                                    "main":  [
+                                                                 [
+                                                                     {
+                                                                         "node":  "Validate TSX Output",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                             ]
+                                                },
+                        "Validate TSX Output":  {
+                                                    "main":  [
+                                                                 [
+                                                                     {
+                                                                         "node":  "Deterministic TSX Output",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                             ]
+                                                },
+                        "Deterministic TSX Output":  {
+                                                         "main":  [
+                                                                      [
+                                                                          {
+                                                                              "node":  "Decode TSX Raw",
+                                                                              "type":  "main",
+                                                                              "index":  0
+                                                                          }
+                                                                      ]
+                                                                  ]
+                                                     },
+                        "Decode TSX Raw":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "TSX Production Ready?",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "TSX Production Ready?":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Production Output",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ],
+                                                                   [
+                                                                       {
+                                                                           "node":  "Fallback Hydration TSX",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                               ]
+                                                  },
+                        "Fallback Hydration TSX":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Production Output",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   }
+                    },
+    "settings":  {
+
+                 },
+    "staticData":  null,
+    "pinData":  {
+
+                },
+    "active":  false,
+    "tags":  [
+
+             ]
+}
