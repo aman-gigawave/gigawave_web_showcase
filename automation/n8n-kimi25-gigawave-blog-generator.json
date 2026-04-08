@@ -21,7 +21,7 @@
                                                         "string":  [
                                                                        {
                                                                            "name":  "topic",
-                                                                           "value":  "Understanding and Fixing Hydration Errors in Next.js"
+                                                                           "value":  "CHANGE_THIS_TOPIC_EACH_RUN"
                                                                        },
                                                                        {
                                                                            "name":  "target_model",
@@ -29,21 +29,21 @@
                                                                        },
                                                                        {
                                                                            "name":  "cloudflare_account_id",
-                                                                           "value":  "={{$env.CLOUDFLARE_ACCOUNT_ID}}"
+                                                                           "value":  "=0d2f243a5a2cb5e95d5e1dfe8b9091ab"
                                                                        },
                                                                        {
                                                                            "name":  "cloudflare_auth_token",
-                                                                           "value":  "={{$env.CLOUDFLARE_AUTH_TOKEN}}"
+                                                                           "value":  "=Bearer cfut_h8fOeqxkOkirHlNJbwzbdyBLtduCpFsukOX5qOQlafa85482"
                                                                        },
                                                                        {
                                                                            "name":  "skill_file_content",
-                                                                           "value":  "---\nname: gigawave-kimik25-blog-raw-generator\ndescription: Generate raw technical blog content in Gigawave style from any topic using strict tagged components. Use when the input is a topic (optionally with code snippets, references, or product context) and the output must follow Gigawave blog flow, tone, and reusable section tags for downstream automation.\n---\n\n# Gigawave Kimi/Kimik 2.5 Blog Raw Skill\n\n## Goal\nCreate a full raw blog package for Gigawave that matches the existing style:\n- practical and implementation-first\n- developer pain point -\u003e clear fix\n- step-by-step explanation with usable snippets\n- pro tips, best practices, resources, and concise close\n\nThe topic can change. The content architecture must stay consistent.\n\n## Input Contract\nAccept:\n- `topic` (required)\n- `target_stack` (optional; e.g., Flutter, Next.js, Node, AI)\n- `audience_level` (optional; beginner/intermediate/advanced)\n- `reference_code` (optional)\n- `constraints` (optional; SEO keyword, word count range, CTA preference)\n\nIf optional fields are missing, infer sensible defaults from `topic`.\n\n## Voice + Style Rules (Derived from Existing Gigawave Blogs)\n1. Start with a concrete real-world dev problem, not theory.\n2. Keep tone mentor-like, direct, and practical.\n3. Prefer short sections with clear headings (`####` style).\n4. Use \"Step 1/2/3...\" for implementation when suitable.\n5. Include runnable or realistic code blocks with filename hints.\n6. Add \"Pro Tip\" style callouts where they increase clarity.\n7. Include best-practice bullets and edge-case notes.\n8. End with useful resources + final takeaway.\n9. Avoid fluff, generic hype, and vague claims.\n10. Keep explanations grounded in tradeoffs (what you gain, what breaks if ignored).\n\n## Mandatory Tagged Components\nEvery output must include all core components below exactly once unless marked optional.\nUse these tags exactly as written so downstream systems can parse them.\n\n`[GW_TAG_01_BLOG_IDENTITY]`\n- title\n- slug (kebab-case)\n- primary topic keyword\n- target stack\n\n`[GW_TAG_02_SEO_METADATA]`\n- seoTitle (55-65 chars ideal)\n- metaDescription (140-160 chars ideal)\n- suggestedTags (3-6)\n- suggestedReadTime\n\n`[GW_TAG_03_HERO_HOOK]`\n- 1-2 paragraph hook based on a practical dev pain\n- why this matters now\n\n`[GW_TAG_04_CONTEXT_SETUP]`\n- concise background\n- assumptions/prerequisites\n\n`[GW_TAG_05_PROBLEM_BREAKDOWN]`\n- key failure points/pitfalls\n- symptoms in real projects\n\n`[GW_TAG_06_SOLUTION_OVERVIEW]`\n- chosen approach\n- why this approach over alternatives\n\n`[GW_TAG_07_IMPLEMENTATION_STEPS]`\n- step-by-step sections (`Step 1`, `Step 2`, ...)\n- each step includes short explanation + actionable instruction\n\n`[GW_TAG_08_CODE_SNIPPETS]`\n- list of code blocks with:\n  - `filename`\n  - `language`\n  - `purpose`\n  - `code`\n\n`[GW_TAG_09_CODE_EXPLANATION]`\n- map important code lines/concepts to outcomes\n- include at least one \"what can go wrong\" note\n\n`[GW_TAG_10_VALIDATION_CHECKLIST]`\n- quick checks to confirm implementation works\n- include expected behavior/results\n\n`[GW_TAG_11_EDGE_CASES]`\n- non-happy paths\n- fallback behavior\n\n`[GW_TAG_12_BEST_PRACTICES]`\n- concise do/don\u0027t bullets\n\n`[GW_TAG_13_PRO_TIPS]`\n- short advanced tips (2-5 bullets)\n\n`[GW_TAG_14_RESOURCES]`\n- official docs and high-signal references\n- avoid low-quality sources\n\n`[GW_TAG_15_FINAL_THOUGHTS]`\n- clear conclusion\n- practical next step for reader\n\n`[GW_TAG_16_PREVIEW_CARD_DATA]`\n- previewTitle\n- previewDescription\n- previewDateText\n- previewReadTime\n- previewTags\n\n`[GW_TAG_17_IMAGE_PLAN]` (optional but preferred)\n- hero image idea\n- 2-4 inline visual ideas\n- alt text intent for each\n\n## Output Format (Strict)\nReturn content in this exact top-level order:\n1. `[GW_TAG_01_BLOG_IDENTITY]`\n2. `[GW_TAG_02_SEO_METADATA]`\n3. `[GW_TAG_03_HERO_HOOK]`\n4. `[GW_TAG_04_CONTEXT_SETUP]`\n5. `[GW_TAG_05_PROBLEM_BREAKDOWN]`\n6. `[GW_TAG_06_SOLUTION_OVERVIEW]`\n7. `[GW_TAG_07_IMPLEMENTATION_STEPS]`\n8. `[GW_TAG_08_CODE_SNIPPETS]`\n9. `[GW_TAG_09_CODE_EXPLANATION]`\n10. `[GW_TAG_10_VALIDATION_CHECKLIST]`\n11. `[GW_TAG_11_EDGE_CASES]`\n12. `[GW_TAG_12_BEST_PRACTICES]`\n13. `[GW_TAG_13_PRO_TIPS]`\n14. `[GW_TAG_14_RESOURCES]`\n15. `[GW_TAG_15_FINAL_THOUGHTS]`\n16. `[GW_TAG_16_PREVIEW_CARD_DATA]`\n17. `[GW_TAG_17_IMAGE_PLAN]`\n\nDo not omit tags. If a section is short, still include the tag with concise content.\n\n## Quality Gate Before Final Output\nValidate internally before returning:\n1. All 17 tags exist in correct order.\n2. Content is topic-specific (not template-like filler).\n3. At least 2 meaningful code snippets for technical topics.\n4. Best practices and edge cases are non-generic.\n5. SEO fields are coherent with title and topic.\n6. Final thoughts include one practical next action.\n\n## Generation Prompt Template (for Kimi/Kimik 2.5)\nUse this when invoking the model:\n\n```text\nYou are generating raw technical blog content for Gigawave.\nFollow the skill: gigawave-kimik25-blog-raw-generator.\n\nInput:\n- topic: {{TOPIC}}\n- target_stack: {{STACK_OR_AUTO}}\n- audience_level: {{LEVEL_OR_AUTO}}\n- reference_code: {{OPTIONAL}}\n- constraints: {{OPTIONAL}}\n\nRules:\n- Follow the exact tagged component order and names.\n- Keep tone practical, implementation-first, and developer-centric.\n- Include concrete steps, realistic code, edge cases, and best practices.\n- Avoid fluff and avoid generic high-level text.\n- Ensure SEO metadata and preview data are production-ready.\n```\n"
+                                                                           "value":  "---\nname: gigawave-kimik25-blog-raw-generator\ndescription: Generate raw technical blog content in Gigawave style from any topic using strict tagged components. Use when the input is a topic (optionally with code snippets, references, or product context) and the output must follow Gigawave blog flow, tone, and reusable section tags for downstream automation.\n---\n\n# Gigawave Kimi/Kimik 2.5 Blog Raw Skill\n\n## Goal\nCreate a full raw blog package for Gigawave that matches the existing style:\n- practical and implementation-first\n- developer pain point -\u003e clear fix\n- step-by-step explanation with usable snippets\n- pro tips, best practices, resources, and concise close\n\nThe topic can change. The content architecture must stay consistent.\n\n## Input Contract\nAccept:\n- `topic` (required)\n- `target_stack` (optional; e.g., Flutter, Next.js, Node, AI)\n- `audience_level` (optional; beginner/intermediate/advanced)\n- `reference_code` (optional)\n- `constraints` (optional; SEO keyword, word count range, CTA preference)\n\nIf optional fields are missing, infer sensible defaults from `topic`.\n\n## Voice + Style Rules (Derived from Existing Gigawave Blogs)\n1. Start with a concrete real-world dev problem, not theory.\n2. Keep tone mentor-like, direct, and practical.\n3. Prefer short sections with clear headings (`####` style).\n4. Use \"Step 1/2/3...\" for implementation when suitable.\n5. Include runnable or realistic code blocks with filename hints.\n6. Add \"Pro Tip\" style callouts where they increase clarity.\n7. Include best-practice bullets and edge-case notes.\n8. End with useful resources + final takeaway.\n9. Avoid fluff, generic hype, and vague claims.\n10. Keep explanations grounded in tradeoffs (what you gain, what breaks if ignored).\n\n## Mandatory Tagged Components\nEvery output must include all core components below exactly once unless marked optional.\nUse these tags exactly as written so downstream systems can parse them.\n\n`[GW_TAG_01_BLOG_IDENTITY]`\n- title\n- slug (kebab-case)\n- primary topic keyword\n- target stack\n\n`[GW_TAG_02_SEO_METADATA]`\n- seoTitle (55-65 chars ideal)\n- metaDescription (140-160 chars ideal)\n- suggestedTags (3-6)\n- suggestedReadTime\n\n`[GW_TAG_03_HERO_HOOK]`\n- 1-2 paragraph hook based on a practical dev pain\n- why this matters now\n\n`[GW_TAG_04_CONTEXT_SETUP]`\n- concise background\n- assumptions/prerequisites\n\n`[GW_TAG_05_PROBLEM_BREAKDOWN]`\n- key failure points/pitfalls\n- symptoms in real projects\n\n`[GW_TAG_06_SOLUTION_OVERVIEW]`\n- chosen approach\n- why this approach over alternatives\n\n`[GW_TAG_07_IMPLEMENTATION_STEPS]`\n- step-by-step sections (`Step 1`, `Step 2`, ...)\n- each step includes short explanation + actionable instruction\n\n`[GW_TAG_08_CODE_SNIPPETS]`\n- list of code blocks with:\n  - `filename`\n  - `language`\n  - `purpose`\n  - `code`\n\n`[GW_TAG_09_CODE_EXPLANATION]`\n- map important code lines/concepts to outcomes\n- include at least one \"what can go wrong\" note\n\n`[GW_TAG_10_VALIDATION_CHECKLIST]`\n- quick checks to confirm implementation works\n- include expected behavior/results\n\n`[GW_TAG_11_EDGE_CASES]`\n- non-happy paths\n- fallback behavior\n\n`[GW_TAG_12_BEST_PRACTICES]`\n- concise do/don\u0027t bullets\n\n`[GW_TAG_13_PRO_TIPS]`\n- short advanced tips (2-5 bullets)\n\n`[GW_TAG_14_RESOURCES]`\n- official docs and high-signal references\n- avoid low-quality sources\n\n`[GW_TAG_15_FINAL_THOUGHTS]`\n- clear conclusion\n- practical next step for reader\n\n`[GW_TAG_16_PREVIEW_CARD_DATA]`\n- previewTitle\n- previewDescription\n- previewDateText\n- previewReadTime\n- previewTags\n\n`[GW_TAG_17_IMAGE_PLAN]` (optional but preferred)\n- hero image idea\n- 2-4 inline visual ideas\n- alt text intent for each\n\n## Output Format (Strict)\nReturn content in this exact top-level order:\n1. `[GW_TAG_01_BLOG_IDENTITY]`\n2. `[GW_TAG_02_SEO_METADATA]`\n3. `[GW_TAG_03_HERO_HOOK]`\n4. `[GW_TAG_04_CONTEXT_SETUP]`\n5. `[GW_TAG_05_PROBLEM_BREAKDOWN]`\n6. `[GW_TAG_06_SOLUTION_OVERVIEW]`\n7. `[GW_TAG_07_IMPLEMENTATION_STEPS]`\n8. `[GW_TAG_08_CODE_SNIPPETS]`\n9. `[GW_TAG_09_CODE_EXPLANATION]`\n10. `[GW_TAG_10_VALIDATION_CHECKLIST]`\n11. `[GW_TAG_11_EDGE_CASES]`\n12. `[GW_TAG_12_BEST_PRACTICES]`\n13. `[GW_TAG_13_PRO_TIPS]`\n14. `[GW_TAG_14_RESOURCES]`\n15. `[GW_TAG_15_FINAL_THOUGHTS]`\n16. `[GW_TAG_16_PREVIEW_CARD_DATA]`\n17. `[GW_TAG_17_IMAGE_PLAN]`\n\nDo not omit tags. If a section is short, still include the tag with concise content.\n\n## Quality Gate Before Final Output\nValidate internally before returning:\n1. All 17 tags exist in correct order.\n2. Content is topic-specific (not template-like filler).\n3. At least 2 meaningful code snippets for technical topics.\n4. Best practices and edge cases are non-generic.\n5. SEO fields are coherent with title and topic.\n6. Final thoughts include one practical next action.\n\n## Generation Prompt Template (for Kimi/Kimik 2.5)\nUse this when invoking the model:\n\n```text\nYou are generating raw technical blog content for Gigawave.\nFollow the skill: gigawave-kimik25-blog-raw-generator.\n\nInput:\n- topic: {{TOPIC}}\n- target_stack: {{STACK_OR_AUTO}}\n- audience_level: {{LEVEL_OR_AUTO}}\n- reference_code: {{OPTIONAL}}\n- constraints: {{OPTIONAL}}\n\nRules:\n- Follow the exact tagged component order and names.\n- Keep tone practical, implementation-first, and developer-centric.\n- Include concrete steps, realistic code, edge cases, and best practices.\n- Avoid fluff and avoid generic high-level text.\n- Ensure SEO metadata and preview data are production-ready.\n```\n\n## Technical Blog Writing Reinforcement\n- Start with a short TL;DR (2-3 lines) before deep details.\n- Keep paragraphs concise (max ~45 words each).\n- Prefer bullet points for key points, tips, tricks, and checklists.\n- For implementation sections, use Step N headings with matching code immediately after each step.\n- Include runnable code examples with language labels and realistic names.\n- Mention trade-offs and when not to use the approach.\n- Avoid filler phrases, hype, and long introductions.\n- Add references to official docs where possible."
                                                                        }
                                                                    ]
                                                     }
                                      },
                       "id":  "set-config",
-                      "name":  "Set Topic + Skill Content",
+                      "name":  "Set Topic + Config",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -54,33 +54,29 @@
                   {
                       "parameters":  {
                                          "method":  "POST",
-                                         "url":  "={{`https://api.cloudflare.com/client/v4/accounts/${$json.cloudflare_account_id}/ai/run/${encodeURIComponent($json.target_model)}`}}",
+                                         "url":  "=https://api.cloudflare.com/client/v4/accounts/0d2f243a5a2cb5e95d5e1dfe8b9091ab/ai/run/@cf/moonshotai/kimi-k2.5",
                                          "sendHeaders":  true,
                                          "headerParameters":  {
                                                                   "parameters":  [
                                                                                      {
                                                                                          "name":  "Authorization",
-                                                                                         "value":  "={{`Bearer ${$json.cloudflare_auth_token}`}}"
+                                                                                         "value":  "=Bearer cfut_h8fOeqxkOkirHlNJbwzbdyBLtduCpFsukOX5qOQlafa85482"
                                                                                      },
                                                                                      {
                                                                                          "name":  "Content-Type",
                                                                                          "value":  "application/json"
-                                                                                     },
-                                                                                     {
-                                                                                         "name":  "x-session-affinity",
-                                                                                         "value":  "={{`gigawave-blog-${$execution.id}`}}"
                                                                                      }
                                                                                  ]
                                                               },
                                          "sendBody":  true,
                                          "specifyBody":  "json",
-                                         "jsonBody":  "{\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are generating raw technical blog content for Gigawave. Topic lock is mandatory: the blog MUST be exactly about \u0027Understanding and Fixing Hydration Errors in Next.js\u0027. If you cannot comply, return exactly TOPIC_MISMATCH. Output must contain exactly these tags in this order: [GW_TAG_01_BLOG_IDENTITY], [GW_TAG_02_SEO_METADATA], [GW_TAG_03_HERO_HOOK], [GW_TAG_04_CONTEXT_SETUP], [GW_TAG_05_PROBLEM_BREAKDOWN], [GW_TAG_06_SOLUTION_OVERVIEW], [GW_TAG_07_IMPLEMENTATION_STEPS], [GW_TAG_08_CODE_SNIPPETS], [GW_TAG_09_CODE_EXPLANATION], [GW_TAG_10_VALIDATION_CHECKLIST], [GW_TAG_11_EDGE_CASES], [GW_TAG_12_BEST_PRACTICES], [GW_TAG_13_PRO_TIPS], [GW_TAG_14_RESOURCES], [GW_TAG_15_FINAL_THOUGHTS], [GW_TAG_16_PREVIEW_CARD_DATA], [GW_TAG_17_IMAGE_PLAN], [GW_TAG_18_KEY_CONCEPTS]. Never use alternate tags. Never use placeholder text such as \u0027Not provided\u0027, \u0027TBD\u0027, or \u0027coming soon\u0027. Return only final blog content text, no JSON wrapper, no reasoning. Keep writing concise: each paragraph max ~45 words (about 3 lines), prefer bullet points, short key points, tips, and tricks over long prose. Include a minimum of 5 implementation steps and at least 3 code snippets.\" \n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"SKILL_FILE_CONTENT:\\\\n{{ JSON.stringify($json.skill_file_content).slice(1,-1) }}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"TOPIC:\\\\n{{ JSON.stringify($json.topic).slice(1,-1) }}\"\n    }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 7000,\n  \"chat_template_kwargs\": {\n    \"enable_thinking\": true,\n    \"clear_thinking\": true\n  },\n  \"stream\": false\n}",
+                                         "jsonBody":  "={\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are generating raw technical blog content for Gigawave. Topic lock is mandatory: the blog MUST be exactly about the provided TOPIC message. Do not change topic. Treat as stateless and ignore previous runs. Use SKILL_FILE_CONTENT for structure/tone and use OFFICIAL_SOURCES links for factual grounding. Use only these inputs. Do not rely on hidden memory. If any section drifts from TOPIC, return exactly TOPIC_MISMATCH. Output must contain exactly these tags in order: [GW_TAG_01_BLOG_IDENTITY], [GW_TAG_02_SEO_METADATA], [GW_TAG_03_HERO_HOOK], [GW_TAG_04_CONTEXT_SETUP], [GW_TAG_05_PROBLEM_BREAKDOWN], [GW_TAG_06_SOLUTION_OVERVIEW], [GW_TAG_07_IMPLEMENTATION_STEPS], [GW_TAG_08_CODE_SNIPPETS], [GW_TAG_09_CODE_EXPLANATION], [GW_TAG_10_VALIDATION_CHECKLIST], [GW_TAG_11_EDGE_CASES], [GW_TAG_12_BEST_PRACTICES], [GW_TAG_13_PRO_TIPS], [GW_TAG_14_RESOURCES], [GW_TAG_15_FINAL_THOUGHTS], [GW_TAG_16_PREVIEW_CARD_DATA], [GW_TAG_17_IMAGE_PLAN], [GW_TAG_18_KEY_CONCEPTS]. Return plain text only.\"\n    },\n    { \"role\": \"user\", \"content\": \"SKILL_FILE_CONTENT:\\\\n{{ JSON.stringify(($json.skill_file_content || \u0027\u0027).slice(0,6000)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"TOPIC:\\\\n{{ JSON.stringify(($json.topic || \u0027\u0027).slice(0,220)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"OFFICIAL_SOURCES:\\\\n{{ JSON.stringify(($json.official_sources_md || \u0027\u0027).slice(0,1200)).slice(1,-1) }}\" }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 4200,\n  \"chat_template_kwargs\": { \"enable_thinking\": false, \"clear_thinking\": false },\n  \"stream\": false\n}",
                                          "options":  {
                                                          "timeout":  180000
                                                      }
                                      },
                       "id":  "call-kimi",
-                      "name":  "Call Kimi K2.5",
+                      "name":  "Step 2 - Call Kimi K2.5 (Uses Skill + Research)",
                       "type":  "n8n-nodes-base.httpRequest",
                       "typeVersion":  4.2,
                       "position":  [
@@ -95,11 +91,11 @@
                                                         "string":  [
                                                                        {
                                                                            "name":  "topic",
-                                                                           "value":  "={{$item(0).$node[\"Set Topic + Skill Content\"].json[\"topic\"]}}"
+                                                                           "value":  "={{$item(0).$node[\"Set Topic + Config\"].json[\"topic\"]}}"
                                                                        },
                                                                        {
                                                                            "name":  "model",
-                                                                           "value":  "={{$item(0).$node[\"Set Topic + Skill Content\"].json[\"target_model\"]}}"
+                                                                           "value":  "={{$item(0).$node[\"Set Topic + Config\"].json[\"target_model\"]}}"
                                                                        },
                                                                        {
                                                                            "name":  "blog_raw_output",
@@ -109,7 +105,7 @@
                                                     }
                                      },
                       "id":  "format-output",
-                      "name":  "Format Output",
+                      "name":  "Step 2 - Format Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -130,7 +126,7 @@
                                                     }
                                      },
                       "id":  "extract-exact-output",
-                      "name":  "Extract Exact Blog Output",
+                      "name":  "Step 2 - Extract Exact Blog Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -145,13 +141,13 @@
                                                         "boolean":  [
                                                                         {
                                                                             "name":  "schema_valid",
-                                                                            "value":  "={{ (() =\u003e { const text = ($json.final_blog_output || \"\").toLowerCase(); const tags = [\"[GW_TAG_01_BLOG_IDENTITY]\",\"[GW_TAG_02_SEO_METADATA]\",\"[GW_TAG_03_HERO_HOOK]\",\"[GW_TAG_04_CONTEXT_SETUP]\",\"[GW_TAG_05_PROBLEM_BREAKDOWN]\",\"[GW_TAG_06_SOLUTION_OVERVIEW]\",\"[GW_TAG_07_IMPLEMENTATION_STEPS]\",\"[GW_TAG_08_CODE_SNIPPETS]\",\"[GW_TAG_09_CODE_EXPLANATION]\",\"[GW_TAG_10_VALIDATION_CHECKLIST]\",\"[GW_TAG_11_EDGE_CASES]\",\"[GW_TAG_12_BEST_PRACTICES]\",\"[GW_TAG_13_PRO_TIPS]\",\"[GW_TAG_14_RESOURCES]\",\"[GW_TAG_15_FINAL_THOUGHTS]\",\"[GW_TAG_16_PREVIEW_CARD_DATA]\",\"[GW_TAG_17_IMAGE_PLAN]\",\"[GW_TAG_18_KEY_CONCEPTS]\"]; let last=-1; for (const tag of tags) { const idx=text.indexOf(tag.toLowerCase()); if (idx===-1 || idx\u003clast) return false; last=idx; } const topicOk = text.includes(\"hydration\") \u0026\u0026 (text.includes(\"next.js\") || text.includes(\"nextjs\")); return topicOk; })() }}"
+                                                                            "value":  "={{ (() =\u003e {\n  const raw = String($json.final_blog_output || \"\");\n  const text = raw.toLowerCase();\n  if (!text.trim() || text.trim() === \"topic_mismatch\") return false;\n\n  const tags = [\"[GW_TAG_01_BLOG_IDENTITY]\",\"[GW_TAG_02_SEO_METADATA]\",\"[GW_TAG_03_HERO_HOOK]\",\"[GW_TAG_04_CONTEXT_SETUP]\",\"[GW_TAG_05_PROBLEM_BREAKDOWN]\",\"[GW_TAG_06_SOLUTION_OVERVIEW]\",\"[GW_TAG_07_IMPLEMENTATION_STEPS]\",\"[GW_TAG_08_CODE_SNIPPETS]\",\"[GW_TAG_09_CODE_EXPLANATION]\",\"[GW_TAG_10_VALIDATION_CHECKLIST]\",\"[GW_TAG_11_EDGE_CASES]\",\"[GW_TAG_12_BEST_PRACTICES]\",\"[GW_TAG_13_PRO_TIPS]\",\"[GW_TAG_14_RESOURCES]\",\"[GW_TAG_15_FINAL_THOUGHTS]\",\"[GW_TAG_16_PREVIEW_CARD_DATA]\",\"[GW_TAG_17_IMAGE_PLAN]\",\"[GW_TAG_18_KEY_CONCEPTS]\"];\n  let last = -1;\n  for (const tag of tags) {\n    const idx = text.indexOf(tag.toLowerCase());\n    if (idx === -1 || idx \u003c last) return false;\n    last = idx;\n  }\n\n  const sec = (a, b) =\u003e {\n    const s = text.indexOf(a.toLowerCase());\n    if (s === -1) return \"\";\n    const from = s + a.length;\n    const e = b ? text.indexOf(b.toLowerCase(), from) : -1;\n    return (e === -1 ? text.slice(from) : text.slice(from, e)).trim();\n  };\n\n  const bodySec = sec(\"[GW_TAG_03_HERO_HOOK]\", \"[GW_TAG_15_FINAL_THOUGHTS]\");\n  const stepsSec = sec(\"[GW_TAG_07_IMPLEMENTATION_STEPS]\", \"[GW_TAG_08_CODE_SNIPPETS]\");\n  const codeSec = sec(\"[GW_TAG_08_CODE_SNIPPETS]\", \"[GW_TAG_09_CODE_EXPLANATION]\");\n\n  const topic = String($item(0).$node[\"Set Topic + Config\"].json[\"topic\"] || \"\").toLowerCase();\n  const research = String($item(0).$node[\"Step 1 - Extract Research Output\"].json[\"research_context\"] || \"\").toLowerCase();\n\n  const stop = new Set([\"how\",\"to\",\"use\",\"using\",\"with\",\"in\",\"for\",\"and\",\"the\",\"a\",\"an\",\"on\",\"of\",\"from\",\"guide\",\"tutorial\",\"overview\",\"basics\"]);\n  const topicTerms = [...new Set((topic.match(/[a-z0-9.+#-]+/g) || []).filter(w =\u003e w.length \u003e= 3 \u0026\u0026 !stop.has(w)))].slice(0, 12);\n  const researchTerms = [...new Set((research.match(/[a-z0-9.+#-]+/g) || []).filter(w =\u003e w.length \u003e= 4 \u0026\u0026 !stop.has(w)))].slice(0, 20);\n  const keys = [...new Set([...topicTerms, ...researchTerms])].slice(0, 14);\n\n  if (!keys.length) return false;\n\n  const hits = (s) =\u003e keys.filter(k =\u003e s.includes(k)).length;\n\n  const bodyHits = hits(bodySec);\n  const stepHits = hits(stepsSec);\n  const codeHits = hits(codeSec);\n  const totalHits = hits(text);\n\n  if (totalHits \u003c Math.min(4, keys.length)) return false;\n  if (bodyHits \u003c Math.min(2, keys.length)) return false;\n  if (stepHits \u003c 1) return false;\n  if (codeHits \u003c 1) return false;\n\n  return true;\n})() }}"
                                                                         }
                                                                     ]
                                                     }
                                      },
                       "id":  "validate-tag-schema",
-                      "name":  "Validate Tag Schema",
+                      "name":  "Step 2 - Validate Tag Schema",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -171,7 +167,7 @@
                                                         }
                                      },
                       "id":  "if-schema-valid",
-                      "name":  "Schema Valid?",
+                      "name":  "Step 2 - Schema Valid?",
                       "type":  "n8n-nodes-base.if",
                       "typeVersion":  2,
                       "position":  [
@@ -182,33 +178,29 @@
                   {
                       "parameters":  {
                                          "method":  "POST",
-                                         "url":  "={{`https://api.cloudflare.com/client/v4/accounts/${$item(0).$node[\"Set Topic + Skill Content\"].json[\"cloudflare_account_id\"]}/ai/run/${encodeURIComponent($item(0).$node[\"Set Topic + Skill Content\"].json[\"target_model\"])}`}}",
+                                         "url":  "=https://api.cloudflare.com/client/v4/accounts/0d2f243a5a2cb5e95d5e1dfe8b9091ab/ai/run/@cf/moonshotai/kimi-k2.5",
                                          "sendHeaders":  true,
                                          "headerParameters":  {
                                                                   "parameters":  [
                                                                                      {
                                                                                          "name":  "Authorization",
-                                                                                         "value":  "={{`Bearer ${$item(0).$node[\"Set Topic + Skill Content\"].json[\"cloudflare_auth_token\"]}`}}"
+                                                                                         "value":  "=Bearer cfut_h8fOeqxkOkirHlNJbwzbdyBLtduCpFsukOX5qOQlafa85482"
                                                                                      },
                                                                                      {
                                                                                          "name":  "Content-Type",
                                                                                          "value":  "application/json"
-                                                                                     },
-                                                                                     {
-                                                                                         "name":  "x-session-affinity",
-                                                                                         "value":  "={{`gigawave-blog-retry-${$execution.id}`}}"
                                                                                      }
                                                                                  ]
                                                               },
                                          "sendBody":  true,
                                          "specifyBody":  "json",
-                                         "jsonBody":  "{\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"REGENERATION MODE. Previous output failed validation. Topic lock is mandatory: generate only \u0027Understanding and Fixing Hydration Errors in Next.js\u0027. If output is about any other topic, return exactly TOPIC_MISMATCH. Return plain text only with exactly these tags in this exact order: [GW_TAG_01_BLOG_IDENTITY], [GW_TAG_02_SEO_METADATA], [GW_TAG_03_HERO_HOOK], [GW_TAG_04_CONTEXT_SETUP], [GW_TAG_05_PROBLEM_BREAKDOWN], [GW_TAG_06_SOLUTION_OVERVIEW], [GW_TAG_07_IMPLEMENTATION_STEPS], [GW_TAG_08_CODE_SNIPPETS], [GW_TAG_09_CODE_EXPLANATION], [GW_TAG_10_VALIDATION_CHECKLIST], [GW_TAG_11_EDGE_CASES], [GW_TAG_12_BEST_PRACTICES], [GW_TAG_13_PRO_TIPS], [GW_TAG_14_RESOURCES], [GW_TAG_15_FINAL_THOUGHTS], [GW_TAG_16_PREVIEW_CARD_DATA], [GW_TAG_17_IMAGE_PLAN], [GW_TAG_18_KEY_CONCEPTS]. Never use alternate tags. Never output placeholders (\u0027Not provided\u0027, \u0027TBD\u0027, \u0027coming soon\u0027). No JSON wrappers, no reasoning, no metadata. Keep writing concise: each paragraph max ~45 words (about 3 lines), prefer bullet points, short key points, tips, and tricks over long prose. Include a minimum of 5 implementation steps and at least 3 code snippets.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"SKILL_FILE_CONTENT:\\\\n{{ JSON.stringify($item(0).$node[\\\"Set Topic + Skill Content\\\"].json[\\\"skill_file_content\\\"]).slice(1,-1) }}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"TOPIC:\\\\n{{ JSON.stringify($item(0).$node[\\\"Set Topic + Skill Content\\\"].json[\\\"topic\\\"]).slice(1,-1) }}\"\n    }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 7000,\n  \"chat_template_kwargs\": {\n    \"enable_thinking\": true,\n    \"clear_thinking\": true\n  },\n  \"stream\": false\n}",
+                                         "jsonBody":  "={\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"REGENERATION MODE. Previous output failed validation. Topic lock is mandatory: generate only the provided TOPIC. Do not change topic. Treat as stateless and ignore previous runs. Use SKILL_FILE_CONTENT for structure/tone and use OFFICIAL_SOURCES links for factual grounding. Use only these inputs. If any section drifts from TOPIC, return exactly TOPIC_MISMATCH. Return plain text only with exact tags in exact order: [GW_TAG_01_BLOG_IDENTITY], [GW_TAG_02_SEO_METADATA], [GW_TAG_03_HERO_HOOK], [GW_TAG_04_CONTEXT_SETUP], [GW_TAG_05_PROBLEM_BREAKDOWN], [GW_TAG_06_SOLUTION_OVERVIEW], [GW_TAG_07_IMPLEMENTATION_STEPS], [GW_TAG_08_CODE_SNIPPETS], [GW_TAG_09_CODE_EXPLANATION], [GW_TAG_10_VALIDATION_CHECKLIST], [GW_TAG_11_EDGE_CASES], [GW_TAG_12_BEST_PRACTICES], [GW_TAG_13_PRO_TIPS], [GW_TAG_14_RESOURCES], [GW_TAG_15_FINAL_THOUGHTS], [GW_TAG_16_PREVIEW_CARD_DATA], [GW_TAG_17_IMAGE_PLAN], [GW_TAG_18_KEY_CONCEPTS].\"\n    },\n    { \"role\": \"user\", \"content\": \"SKILL_FILE_CONTENT:\\\\n{{ JSON.stringify(($item(0).$node[\\\"Set Topic + Config\\\"].json[\\\"skill_file_content\\\"] || \u0027\u0027).slice(0,6000)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"TOPIC:\\\\n{{ JSON.stringify(($item(0).$node[\\\"Set Topic + Config\\\"].json[\\\"topic\\\"] || \u0027\u0027).slice(0,220)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"OFFICIAL_SOURCES:\\\\n{{ JSON.stringify(($item(0).$node[\\\"Step 1 - Build Topic Research Pack\\\"].json[\\\"official_sources_md\\\"] || \u0027\u0027).slice(0,1200)).slice(1,-1) }}\" }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 4200,\n  \"chat_template_kwargs\": { \"enable_thinking\": false, \"clear_thinking\": false },\n  \"stream\": false\n}",
                                          "options":  {
                                                          "timeout":  180000
                                                      }
                                      },
                       "id":  "call-kimi-retry",
-                      "name":  "Call Kimi K2.5 Retry",
+                      "name":  "Step 2 - Retry Kimi K2.5 (Uses Skill + Research)",
                       "type":  "n8n-nodes-base.httpRequest",
                       "typeVersion":  4.2,
                       "position":  [
@@ -233,7 +225,7 @@
                                                     }
                                      },
                       "id":  "extract-retry-output",
-                      "name":  "Extract Retry Output",
+                      "name":  "Step 2 - Extract Retry Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -258,7 +250,7 @@
                                                     }
                                      },
                       "id":  "use-initial-output",
-                      "name":  "Use Initial Output",
+                      "name":  "Step 2 - Use Initial Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -281,13 +273,13 @@
                                                                        },
                                                                        {
                                                                            "name":  "topic",
-                                                                           "value":  "={{$item(0).$node[\"Set Topic + Skill Content\"].json[\"topic\"]}}"
+                                                                           "value":  "={{$item(0).$node[\"Set Topic + Config\"].json[\"topic\"]}}"
                                                                        }
                                                                    ]
                                                     }
                                      },
                       "id":  "final-output",
-                      "name":  "Final Output",
+                      "name":  "Step 2 - Final Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -300,7 +292,7 @@
                                          "jsCode":  "const text = ($json.final_blog_output || \"\").trim();\nconst tagNames = [\n  \"GW_TAG_01_BLOG_IDENTITY\",\"GW_TAG_02_SEO_METADATA\",\"GW_TAG_03_HERO_HOOK\",\"GW_TAG_04_CONTEXT_SETUP\",\n  \"GW_TAG_05_PROBLEM_BREAKDOWN\",\"GW_TAG_06_SOLUTION_OVERVIEW\",\"GW_TAG_07_IMPLEMENTATION_STEPS\",\"GW_TAG_08_CODE_SNIPPETS\",\n  \"GW_TAG_09_CODE_EXPLANATION\",\"GW_TAG_10_VALIDATION_CHECKLIST\",\"GW_TAG_11_EDGE_CASES\",\"GW_TAG_12_BEST_PRACTICES\",\n  \"GW_TAG_13_PRO_TIPS\",\"GW_TAG_14_RESOURCES\",\"GW_TAG_15_FINAL_THOUGHTS\",\"GW_TAG_16_PREVIEW_CARD_DATA\",\"GW_TAG_17_IMAGE_PLAN\",\"GW_TAG_18_KEY_CONCEPTS\"\n];\n\nconst sections = {};\nfor (let i = 0; i \u003c tagNames.length; i++) {\n  const open = `[${tagNames[i]}]`;\n  const start = text.indexOf(open);\n  if (start === -1) continue;\n  const contentStart = start + open.length;\n  let end = text.length;\n  for (let j = i + 1; j \u003c tagNames.length; j++) {\n    const next = text.indexOf(`[${tagNames[j]}]`, contentStart);\n    if (next !== -1) { end = next; break; }\n  }\n  sections[tagNames[i]] = text.slice(contentStart, end).trim();\n}\n\nreturn [{ json: { ...$json, sections, parsed_tag_count: Object.keys(sections).length } }];"
                                      },
                       "id":  "b8d4f3d9-1f65-4adf-b844-3f7d9a63f001",
-                      "name":  "Parse GW Tags",
+                      "name":  "Step 3 - Parse GW Tags",
                       "type":  "n8n-nodes-base.code",
                       "typeVersion":  2,
                       "position":  [
@@ -310,10 +302,10 @@
                   },
                   {
                       "parameters":  {
-                                         "jsCode":  "const s = $json.sections || {};\nconst get = (k) =\u003e (s[k] || \"\").trim();\n\nconst parseKV = (block) =\u003e {\n  const out = {};\n  (block || \"\").split(\"\\n\").forEach((line) =\u003e {\n    const m = line.match(/^\\s*[-*]?\\s*([A-Za-z0-9 _-]+?)\\s*:\\s*(.+)\\s*$/);\n    if (m) out[m[1].trim().toLowerCase()] = m[2].trim();\n  });\n  return out;\n};\n\nconst bullets = (block) =\u003e (block || \"\")\n  .split(\"\\n\")\n  .map(x =\u003e x.trim())\n  .filter(x =\u003e /^-\\s+/.test(x))\n  .map(x =\u003e x.replace(/^-\\s+/, \"\").trim());\n\nconst paragraphs = (block) =\u003e (block || \"\")\n  .split(/\\n\\n+/)\n  .map(x =\u003e x.trim())\n  .filter(Boolean);\nconst trimWords = (text, maxWords = 45) =\u003e {\n  const t = String(text || \"\").replace(/\\s+/g, \" \").trim();\n  if (!t) return \"\";\n  const parts = t.split(\" \");\n  return parts.length \u003c= maxWords ? t : `${parts.slice(0, maxWords).join(\" \")}...`;\n};\n\nconst compactParagraphs = (arr, maxParas = 2, maxWords = 45) =\u003e\n  (arr || []).map((x) =\u003e trimWords(x, maxWords)).filter(Boolean).slice(0, maxParas);\n\nconst compactBullets = (arr, maxItems = 7, maxWords = 22) =\u003e\n  (arr || []).map((x) =\u003e trimWords(x, maxWords)).filter(Boolean).slice(0, maxItems);\n\nconst identity = parseKV(get(\"GW_TAG_01_BLOG_IDENTITY\"));\nconst seo = parseKV(get(\"GW_TAG_02_SEO_METADATA\"));\n\nlet title = identity[\"title\"] || \"\";\nlet slug = identity[\"slug\"] || \"\";\nif (!slug \u0026\u0026 title) slug = title.toLowerCase().replace(/[^a-z0-9]+/g, \"-\").replace(/^-+|-+$/g, \"\");\n\nconst readTimeRaw = seo[\"suggestedreadtime\"] || seo[\"readtime\"] || \"8\";\nconst readTime = (readTimeRaw.match(/\\d+/) || [\"8\"])[0];\n\nconst hero = compactParagraphs(paragraphs(get(\"GW_TAG_03_HERO_HOOK\")), 2, 42);\nconst context = compactParagraphs(paragraphs(get(\"GW_TAG_04_CONTEXT_SETUP\")), 2, 40);\nconst problem = compactBullets(bullets(get(\"GW_TAG_05_PROBLEM_BREAKDOWN\")), 8, 20);\nconst solution = compactParagraphs(paragraphs(get(\"GW_TAG_06_SOLUTION_OVERVIEW\")), 2, 40);\nconst steps = (get(\"GW_TAG_07_IMPLEMENTATION_STEPS\") || \"\")\n  .split(\"\\n\")\n  .map(x =\u003e x.trim())\n  .filter(x =\u003e /^(\\*\\*\\s*)?step\\s+\\d+/i.test(x) || /^-\\s+/.test(x))\n  .map(x =\u003e x.replace(/^[-*\\s]+/, \"\").trim());\n\nconst best = compactBullets(bullets(get(\"GW_TAG_12_BEST_PRACTICES\")), 8, 18);\nconst tips = compactBullets(bullets(get(\"GW_TAG_13_PRO_TIPS\")), 8, 18);\nconst finalThoughts = compactParagraphs(paragraphs(get(\"GW_TAG_15_FINAL_THOUGHTS\")), 2, 40);\n\nconst codeRegex = /```([a-zA-Z0-9_+-]*)\\n([\\s\\S]*?)```/g;\nconst codeRaw = get(\"GW_TAG_08_CODE_SNIPPETS\");\nconst codeBlocks = [];\nlet m;\nwhile ((m = codeRegex.exec(codeRaw)) !== null) {\n  codeBlocks.push({ language: (m[1] || \"text\").trim() || \"text\", code: (m[2] || \"\").trim() });\n}\n\nconst resRaw = get(\"GW_TAG_14_RESOURCES\");\nconst resources = [];\nconst mdLink = /\\[([^\\]]+)\\]\\(([^)]+)\\)/g;\nlet l;\nwhile ((l = mdLink.exec(resRaw)) !== null) resources.push({ label: l[1].trim(), href: l[2].trim() });\n\nconst kcRaw = get(\"GW_TAG_18_KEY_CONCEPTS\");\nlet conceptsTitle = \"Key Concepts Covered\";\nlet conceptItems = [];\nlet highlightTokens = [];\nif (kcRaw) {\n  const lines = kcRaw.split(\"\\n\").map(x =\u003e x.trim()).filter(Boolean);\n  let mode = \"items\";\n  for (const line of lines) {\n    const st = line.match(/^[-*]?\\s*sectionTitle\\s*:\\s*(.+)$/i);\n    if (st) { conceptsTitle = st[1].trim(); continue; }\n    if (/^[-*]?\\s*items\\s*:/i.test(line)) { mode = \"items\"; continue; }\n    if (/^[-*]?\\s*highlightTokens\\s*:/i.test(line)) { mode = \"tokens\"; continue; }\n    if (/^-\\s+/.test(line)) {\n      const v = line.replace(/^-\\s+/, \"\").trim();\n      if (mode === \"tokens\") highlightTokens.push(v.replace(/^`|`$/g, \"\"));\n      else conceptItems.push(v);\n    }\n  }\n}\nif (!conceptItems.length) {\n  conceptItems = [\n    \"Use deterministic server-client rendering and validate in production mode.\",\n    \"Isolate browser-only APIs behind useEffect.\",\n    \"Use dynamic imports with ssr:false for browser-only widgets.\"\n  ];\n}\nif (!highlightTokens.length) {\n  const tokenSet = new Set();\n  conceptItems.forEach((item) =\u003e {\n    const matches = item.match(/`([^`]+)`/g) || [];\n    matches.forEach((m) =\u003e tokenSet.add(m.replace(/`/g, \"\")));\n  });\n  highlightTokens = Array.from(tokenSet);\n}\n\n\nconst topicText = String($json.topic || title || \"\").toLowerCase();\nlet normalizedSteps = (steps || []).filter(Boolean);\nif (normalizedSteps.length \u003c 5) {\n  const hydrationDefaults = [\n    \"Step 1: Reproduce hydration mismatch and isolate the component boundary.\",\n    \"Step 2: Move browser-only APIs (window, document, localStorage) into useEffect.\",\n    \"Step 3: Stabilize initial server/client render output with deterministic values.\",\n    \"Step 4: Use dynamic imports with ssr:false for browser-only widgets.\",\n    \"Step 5: Validate in production mode and monitor console/runtime errors.\"\n  ];\n  const genericDefaults = [\n    \"Step 1: Set up a deterministic baseline implementation.\",\n    \"Step 2: Implement core logic with explicit edge-case handling.\",\n    \"Step 3: Add robust state/error handling for non-happy paths.\",\n    \"Step 4: Integrate and test with realistic runtime conditions.\",\n    \"Step 5: Validate behavior and performance before release.\"\n  ];\n  const defaults = topicText.includes(\"hydration\") ? hydrationDefaults : genericDefaults;\n  normalizedSteps = [...normalizedSteps, ...defaults].filter((v, i, a) =\u003e a.indexOf(v) === i).slice(0, 7);\n}\n\nlet normalizedCodeBlocks = Array.isArray(codeBlocks) ? [...codeBlocks] : [];\nif (normalizedCodeBlocks.length \u003c 3) {\n  if (topicText.includes(\"hydration\")) {\n    const hydrationSnippets = [\n      {\n        language: \"tsx\",\n        code: \"\u0027use client\u0027;\\nimport { useEffect, useState } from \u0027react\u0027;\\n\\nexport default function ClientOnlyValue() {\\n  const [value, setValue] = useState\u003cstring\u003e(\u0027\u0027);\\n  useEffect(() =\u003e { setValue(window.location.pathname); }, []);\\n  return \u003cdiv\u003e{value || \u0027Loading...\u0027}\u003c/div\u003e;\\n}\"\n      },\n      {\n        language: \"tsx\",\n        code: \"import dynamic from \u0027next/dynamic\u0027;\\n\\nconst BrowserChart = dynamic(() =\u003e import(\u0027./BrowserChart\u0027), { ssr: false });\\n\\nexport default function ChartSection() {\\n  return \u003cBrowserChart /\u003e;\\n}\"\n      },\n      {\n        language: \"tsx\",\n        code: \"export default function SafeTime() {\\n  const now = new Date();\\n  return \u003ctime suppressHydrationWarning\u003e{now.toLocaleTimeString()}\u003c/time\u003e;\\n}\"\n      }\n    ];\n    for (const snip of hydrationSnippets) {\n      if (normalizedCodeBlocks.length \u003e= 3) break;\n      normalizedCodeBlocks.push(snip);\n    }\n  } else {\n    while (normalizedCodeBlocks.length \u003c 3) {\n      normalizedCodeBlocks.push({\n        language: normalizedCodeBlocks[0]?.language || \"ts\",\n        code: \"// Additional implementation snippet\\nexport const placeholder = true;\"\n      });\n    }\n  }\n}\nconst safeBase = (slug || title || \"Generated Blog\").replace(/[^a-zA-Z0-9 ]/g, \" \").split(/\\s+/).filter(Boolean);\nconst componentName = (safeBase.length ? safeBase : [\"Generated\",\"Blog\"]).map(x =\u003e x[0].toUpperCase() + x.slice(1)).join(\"\") + \"Page\";\n\nreturn [{\n  json: {\n    ...$json,\n    title,\n    slug,\n    readTime,\n    componentName,\n    hero,\n    context,\n    problem,\n    solution,\n    steps: normalizedSteps,\n    best,\n    tips,\n    finalThoughts,\n    codeBlocks: normalizedCodeBlocks,\n    resources,\n    conceptsTitle,\n    conceptItems,\n    highlightTokens,\n  }\n}];"
+                                         "jsCode":  "const s = $json.sections || {};\nconst get = (k) =\u003e (s[k] || \"\").trim();\n\nconst parseKV = (block) =\u003e {\n  const out = {};\n  (block || \"\").split(\"\\n\").forEach((line) =\u003e {\n    const m = line.match(/^\\s*[-*]?\\s*([A-Za-z0-9 _-]+?)\\s*:\\s*(.+)\\s*$/);\n    if (m) out[m[1].trim().toLowerCase()] = m[2].trim();\n  });\n  return out;\n};\n\nconst bullets = (block) =\u003e\n  (block || \"\")\n    .split(\"\\n\")\n    .map((x) =\u003e x.trim())\n    .filter((x) =\u003e /^-\\s+/.test(x))\n    .map((x) =\u003e x.replace(/^-\\s+/, \"\").trim());\n\nconst paragraphs = (block) =\u003e\n  (block || \"\")\n    .split(/\\n\\n+/)\n    .map((x) =\u003e x.trim())\n    .filter(Boolean);\n\nconst trimWords = (text, maxWords = 45) =\u003e {\n  const t = String(text || \"\").replace(/\\s+/g, \" \").trim();\n  if (!t) return \"\";\n  const parts = t.split(\" \");\n  return parts.length \u003c= maxWords ? t : `${parts.slice(0, maxWords).join(\" \")}...`;\n};\n\nconst compactParagraphs = (arr, maxParas = 2, maxWords = 45) =\u003e\n  (arr || []).map((x) =\u003e trimWords(x, maxWords)).filter(Boolean).slice(0, maxParas);\n\nconst compactBullets = (arr, maxItems = 8, maxWords = 22) =\u003e\n  (arr || []).map((x) =\u003e trimWords(x, maxWords)).filter(Boolean).slice(0, maxItems);\n\nconst topic = String($json.topic || \"\").trim();\nconst topicLower = topic.toLowerCase();\nconst stop = new Set([\"how\",\"to\",\"use\",\"using\",\"with\",\"in\",\"for\",\"and\",\"the\",\"a\",\"an\",\"on\",\"of\",\"from\",\"guide\",\"tutorial\",\"overview\",\"basics\"]);\nconst topicTerms = [...new Set((topicLower.match(/[a-z0-9.+#-]+/g) || []).filter((w) =\u003e w.length \u003e= 3 \u0026\u0026 !stop.has(w)))].slice(0, 12);\n\nconst researchContext = String($json.research_context || \"\");\nconst rcLower = researchContext.toLowerCase();\nconst researchTerms = [...new Set((rcLower.match(/[a-z0-9.+#-]+/g) || []).filter((w) =\u003e w.length \u003e= 4 \u0026\u0026 !stop.has(w)))].slice(0, 20);\nconst keyTerms = [...new Set([...topicTerms, ...researchTerms])].slice(0, 12);\n\nconst inferLang = () =\u003e {\n  if (/\\b(flutter|dart|android|ios|widget)\\b/.test(topicLower)) return \"dart\";\n  if (/\\b(next|react|typescript|tsx|javascript|node|frontend|web)\\b/.test(topicLower)) return \"tsx\";\n  if (/\\b(python|fastapi|django|flask)\\b/.test(topicLower)) return \"python\";\n  if (/\\b(java|spring)\\b/.test(topicLower)) return \"java\";\n  if (/\\b(go|golang)\\b/.test(topicLower)) return \"go\";\n  return \"text\";\n};\n\nconst identity = parseKV(get(\"GW_TAG_01_BLOG_IDENTITY\"));\nconst seo = parseKV(get(\"GW_TAG_02_SEO_METADATA\"));\n\nlet title = identity.title || topic || \"Generated Blog\";\nlet slug = identity.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, \"-\").replace(/^-+|-+$/g, \"\");\nif (!slug) slug = \"generated-blog\";\n\nconst readTimeRaw = seo.suggestedreadtime || seo.readtime || \"8\";\nconst readTime = (String(readTimeRaw).match(/\\d+/) || [\"8\"])[0];\n\nlet hero = compactParagraphs(paragraphs(get(\"GW_TAG_03_HERO_HOOK\")), 2, 42);\nlet context = compactParagraphs(paragraphs(get(\"GW_TAG_04_CONTEXT_SETUP\")), 2, 40);\nlet problem = compactBullets(bullets(get(\"GW_TAG_05_PROBLEM_BREAKDOWN\")), 8, 20);\nlet solution = compactParagraphs(paragraphs(get(\"GW_TAG_06_SOLUTION_OVERVIEW\")), 2, 40);\nlet best = compactBullets(bullets(get(\"GW_TAG_12_BEST_PRACTICES\")), 8, 18);\nlet tips = compactBullets(bullets(get(\"GW_TAG_13_PRO_TIPS\")), 8, 18);\nlet finalThoughts = compactParagraphs(paragraphs(get(\"GW_TAG_15_FINAL_THOUGHTS\")), 2, 40);\n\nlet steps = (get(\"GW_TAG_07_IMPLEMENTATION_STEPS\") || \"\")\n  .split(\"\\n\")\n  .map((x) =\u003e x.trim())\n  .filter((x) =\u003e /^(\\*\\*\\s*)?step\\s+\\d+/i.test(x) || /^-\\s+/.test(x))\n  .map((x) =\u003e trimWords(x.replace(/^[-*\\s]+/, \"\").trim(), 20));\n\nconst codeRegex = /```([a-zA-Z0-9_+-]*)\\n([\\s\\S]*?)```/g;\nconst codeRaw = get(\"GW_TAG_08_CODE_SNIPPETS\");\nlet codeBlocks = [];\nlet m;\nwhile ((m = codeRegex.exec(codeRaw)) !== null) {\n  codeBlocks.push({ language: (m[1] || \"text\").trim() || \"text\", code: (m[2] || \"\").trim() });\n}\n\nconst matchCount = (txt) =\u003e keyTerms.filter((k) =\u003e txt.includes(k)).length;\nconst blob = [title, ...hero, ...context, ...problem, ...solution, ...steps, ...best, ...tips, ...finalThoughts, ...codeBlocks.map((b) =\u003e `${b.language}\\n${b.code}`)].join(\"\\n\").toLowerCase();\nconst coherenceScore = matchCount(blob);\nconst lowCoherence = keyTerms.length \u003e 0 \u0026\u0026 coherenceScore \u003c Math.min(3, keyTerms.length);\n\nif (lowCoherence || !hero.length || !context.length || !problem.length || !solution.length || !best.length || !tips.length || !finalThoughts.length || steps.length \u003c 5 || codeBlocks.length \u003c 3) {\n  const topicLabel = topic || \"the topic\";\n  const pointLines = (researchContext || \"\").split(\"\\n\").map((x) =\u003e x.trim()).filter((x) =\u003e /^[-*]\\s+/.test(x)).map((x) =\u003e x.replace(/^[-*]\\s+/, \"\"));\n\n  hero = [\n    trimWords(`${topicLabel} matters in real projects because weak implementation choices create hard-to-debug failures and inconsistent user experience.`, 32),\n    trimWords(`This guide uses focused, production-oriented steps and code examples grounded in official references.`, 22)\n  ];\n\n  context = [\n    trimWords(`We start with minimal setup, then move to implementation patterns and validation checkpoints for ${topicLabel}.`, 30)\n  ];\n\n  problem = (pointLines.slice(0, 5).length ? pointLines.slice(0, 5) : [\n    `Unclear setup path for ${topicLabel}`,\n    `Inconsistent implementation patterns`,\n    `Missing validation for edge cases`\n  ]).map((x) =\u003e trimWords(x, 18));\n\n  solution = [trimWords(`Apply a step-by-step architecture: setup, core implementation, validation, and performance checks for ${topicLabel}.`, 28)];\n\n  steps = [\n    `Step 1: Define prerequisites and expected behavior for ${topicLabel}.`,\n    `Step 2: Implement a minimal working baseline.`,\n    `Step 3: Add robust handling for non-happy paths.`,\n    `Step 4: Improve structure for reuse and readability.`,\n    `Step 5: Validate with realistic usage scenarios.`\n  ].map((x) =\u003e trimWords(x, 20));\n\n  const lang = inferLang();\n  if (lang === \"dart\") {\n    codeBlocks = [\n      { language: \"dart\", code: `// ${topicLabel}: setup\\nimport \u0027package:flutter/material.dart\u0027;` },\n      { language: \"dart\", code: `// ${topicLabel}: implementation\\nclass FeatureService {\\n  String run() =\u003e \u0027ok\u0027;\\n}` },\n      { language: \"dart\", code: `// ${topicLabel}: validation\\nbool validate(String value) =\u003e value.trim().isNotEmpty;` }\n    ];\n  } else if (lang === \"tsx\") {\n    codeBlocks = [\n      { language: \"tsx\", code: `// ${topicLabel}: setup\\nexport default function Setup(){ return \u003cdiv\u003eSetup\u003c/div\u003e; }` },\n      { language: \"tsx\", code: `// ${topicLabel}: implementation\\nexport function run(){ return true; }` },\n      { language: \"tsx\", code: `// ${topicLabel}: validation\\nexport const validate=(v:string)=\u003ev.trim().length\u003e0;` }\n    ];\n  } else if (lang === \"python\") {\n    codeBlocks = [\n      { language: \"python\", code: `# ${topicLabel}: setup\\ndef setup():\\n    return True` },\n      { language: \"python\", code: `# ${topicLabel}: implementation\\ndef run():\\n    return True` },\n      { language: \"python\", code: `# ${topicLabel}: validation\\ndef validate(value: str) -\u003e bool:\\n    return bool(value.strip())` }\n    ];\n  } else {\n    codeBlocks = [\n      { language: \"text\", code: `${topicLabel}: setup` },\n      { language: \"text\", code: `${topicLabel}: implementation` },\n      { language: \"text\", code: `${topicLabel}: validation` }\n    ];\n  }\n\n  best = [\n    \"Keep implementation modular and testable\",\n    \"Use one clear source of truth for configuration\",\n    \"Validate behavior before optimization\"\n  ];\n  tips = [\n    \"Prefer concise code snippets with clear intent\",\n    \"Document edge cases and trade-offs\",\n    \"Use official docs for API-level decisions\"\n  ];\n  finalThoughts = [trimWords(`Treat ${topicLabel} as an iterative build: baseline first, then reliability and performance hardening.`, 24)];\n}\n\nconst resRaw = get(\"GW_TAG_14_RESOURCES\");\nconst resources = [];\nconst mdLink = /\\[([^\\]]+)\\]\\(([^)]+)\\)/g;\nlet l;\nwhile ((l = mdLink.exec(resRaw)) !== null) resources.push({ label: l[1].trim(), href: l[2].trim() });\n\nif (!resources.length \u0026\u0026 Array.isArray($json.official_sources) \u0026\u0026 $json.official_sources.length) {\n  $json.official_sources.forEach((r) =\u003e {\n    if (r \u0026\u0026 r.label \u0026\u0026 r.url) resources.push({ label: String(r.label), href: String(r.url) });\n  });\n}\nif (!resources.length) {\n  resources.push({ label: \"Official Documentation\", href: \"https://developer.mozilla.org/\" });\n}\n\nconst kcRaw = get(\"GW_TAG_18_KEY_CONCEPTS\");\nlet conceptsTitle = \"Key Concepts Covered\";\nlet conceptItems = [];\nlet highlightTokens = [];\nif (kcRaw) {\n  const lines = kcRaw.split(\"\\n\").map((x) =\u003e x.trim()).filter(Boolean);\n  let mode = \"items\";\n  for (const line of lines) {\n    const st = line.match(/^[-*]?\\s*sectionTitle\\s*:\\s*(.+)$/i);\n    if (st) { conceptsTitle = st[1].trim(); continue; }\n    if (/^[-*]?\\s*items\\s*:/i.test(line)) { mode = \"items\"; continue; }\n    if (/^[-*]?\\s*highlightTokens\\s*:/i.test(line)) { mode = \"tokens\"; continue; }\n    if (/^-\\s+/.test(line)) {\n      const v = line.replace(/^-\\s+/, \"\").trim();\n      if (mode === \"tokens\") highlightTokens.push(v.replace(/^`|`$/g, \"\"));\n      else conceptItems.push(v);\n    }\n  }\n}\nif (!conceptItems.length) {\n  conceptItems = [\n    `Core setup for ${topic || \"the topic\"}`,\n    \"Implementation flow and reusable patterns\",\n    \"Validation and optimization strategy\"\n  ];\n}\nif (!highlightTokens.length) {\n  highlightTokens = keyTerms.length ? keyTerms.slice(0, 8) : [\"Setup\", \"Implementation\", \"Validation\"];\n}\n\nconst componentName = \"GeneratedBlogPage\";\n\nreturn [{\n  json: {\n    ...$json,\n    title,\n    slug,\n    readTime,\n    componentName,\n    hero,\n    context,\n    problem,\n    solution,\n    steps,\n    best,\n    tips,\n    finalThoughts,\n    codeBlocks,\n    resources,\n    conceptsTitle,\n    conceptItems,\n    highlightTokens,\n  }\n}];"
                                      },
                       "id":  "7a4e66f0-7d46-4c3d-ae84-2ddfd4f99602",
-                      "name":  "Map Tags To TSX Model",
+                      "name":  "Step 3 - Map Tags To TSX Model",
                       "type":  "n8n-nodes-base.code",
                       "typeVersion":  2,
                       "position":  [
@@ -323,10 +315,10 @@
                   },
                   {
                       "parameters":  {
-                                         "jsCode":  "const d = $json;\n\nconst q = (v) =\u003e JSON.stringify(String(v ?? \"\"));\nconst esc = (s) =\u003e String(s || \"\")\n  .replace(/\u0026/g, \"\u0026amp;\")\n  .replace(/\u003c/g, \"\u0026lt;\")\n  .replace(/\u003e/g, \"\u0026gt;\")\n  .replace(/\\{/g, \"\u0026#123;\")\n  .replace(/\\}/g, \"\u0026#125;\");\n\nconst para = (arr) =\u003e (arr || []).map((p) =\u003e `\\n        \u003cBlogContent\u003e{${q(p)}}\u003c/BlogContent\u003e`).join(\"\");\n\nconst ext = (lang) =\u003e {\n  const m = { typescript: \u0027ts\u0027, javascript: \u0027js\u0027, tsx: \u0027tsx\u0027, jsx: \u0027jsx\u0027, bash: \u0027sh\u0027, shell: \u0027sh\u0027, dart: \u0027dart\u0027, rust: \u0027rs\u0027, python: \u0027py\u0027, json: \u0027json\u0027, yaml: \u0027yml\u0027, toml: \u0027toml\u0027 };\n  const key = String(lang || \u0027txt\u0027).toLowerCase();\n  return m[key] || key.replace(/[^a-z0-9]/g, \u0027\u0027) || \u0027txt\u0027;\n};\n\nconst tokenize = (line, tokens) =\u003e {\n  if (!tokens || !tokens.length) return esc(line);\n  let out = esc(line);\n  tokens\n    .filter(Boolean)\n    .sort((a, b) =\u003e b.length - a.length)\n    .forEach((t) =\u003e {\n      const safe = t.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$\u0026\");\n      const re = new RegExp(`(${safe})`, \"g\");\n      out = out.replace(re, `\u003cBlogHighlighter\u003e$1\u003c/BlogHighlighter\u003e`);\n    });\n  return out;\n};\n\nconst conceptItemsJsx = (d.conceptItems || []).length\n  ? d.conceptItems.map((line, i) =\u003e `\u003cReact.Fragment key={${q(`ci-${i}`)}}\u003e${tokenize(line, d.highlightTokens || [])}\u003c/React.Fragment\u003e`).join(\",\\n              \")\n  : `\u003cReact.Fragment key=\\\"ci-0\\\"\u003eUse \u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e for browser APIs.\u003c/React.Fragment\u003e`;\n\nconst conceptChips = (d.highlightTokens || []).length\n  ? d.highlightTokens.map((t, i) =\u003e `\u003cspan key={${q(String(i))}} className=\\\"inline-flex\\\"\u003e\u003cBlogHighlighter\u003e${esc(t)}\u003c/BlogHighlighter\u003e\u003c/span\u003e`).join(\"\\n            \")\n  : `\u003cspan key=\\\"0\\\" className=\\\"inline-flex\\\"\u003e\u003cBlogHighlighter\u003eHydration\u003c/BlogHighlighter\u003e\u003c/span\u003e`;\n\nconst resourceItems = (d.resources || []).length\n  ? d.resources.map((r, i) =\u003e `\u003cLink key={${q(String(i))}} href={${q(r.href)}} target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" className=\\\"text-sky-400 hover:text-sky-600\\\"\u003e${esc(r.label)}\u003c/Link\u003e`).join(\",\\n            \")\n  : `\u003cLink key=\\\"0\\\" href=\\\"https://nextjs.org/docs\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" className=\\\"text-sky-400 hover:text-sky-600\\\"\u003eNext.js Docs\u003c/Link\u003e`;\n\nconst stepItems = (d.steps || []).length ? d.steps : [\"Step 1: Implement solution\"];\nconst codeBlocks = d.codeBlocks || [];\nconst pairedCount = Math.min(stepItems.length, codeBlocks.length);\nconst interleavedStepCode = Array.from({ length: pairedCount }).map((_, i) =\u003e {\n  const step = stepItems[i];\n  const block = codeBlocks[i];\n  const stepTitle = String(step).replace(/^[-*\\s]+/, \"\").trim();\n  return `\\n        \u003cBlogSubTitle\u003e{${q(stepTitle)}}\u003c/BlogSubTitle\u003e\\n        \u003cCodeBlock\\n          language=${q(block.language || \"text\")}\\n          filename=${q(`snippet-${i + 1}.${ext(block.language)}`)}\\n          code={${q(block.code || \"\")}}\\n        /\u003e`;\n}).join(\"\\n\");\n\nconst remainingStepItems = stepItems.slice(pairedCount);\nconst remainingStepsBlock = remainingStepItems.length\n  ? `\\n        \u003cBlogSubTitle\u003eAdditional Implementation Notes\u003c/BlogSubTitle\u003e\\n        \u003cBlogList items={[\\n              ${remainingStepItems.map((x) =\u003e q(x)).join(\",\\n              \")}\\n        ]} /\u003e`\n  : \"\";\n\nconst listItems = (arr) =\u003e (arr \u0026\u0026 arr.length ? arr.map((x) =\u003e q(x)).join(\",\\n              \") : q(\"Use deterministic server-client rendering and validate in production mode.\"));\n\nconst title = d.title || \"Generated Blog\";\nconst component = d.componentName || \"GeneratedBlogPage\";\n\nconst tsx = `\"use client\";\nimport { BlogContent, BlogHighlighter, BlogList, BlogSubTitle, BlogTips, WriterInfo } from \"@/app/components/BlogComponents\";\nimport CustomTitle from \"@/components/custom/CustomTitle\";\nimport { CodeBlock } from \"@/components/ui/code-block\";\nimport { BLOG_AUTHORS, BLOG_PREVIEWS } from \"@/lib/constants\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport React from \"react\";\nimport RelatedNextBlogButton from \"@/app/components/RelatedNextBlogButton\";\nimport TagsList from \"@/components/custom/TagsList\";\n\nconst ${component} = () =\u003e {\n  const author = BLOG_AUTHORS[1];\n  const pathname = usePathname().split(\"/\")[2];\n  const tags = BLOG_PREVIEWS.find((blog) =\u003e blog.slug === pathname)?.tags || [];\n\n  return (\n    \u003cdiv className=\"min-h-screen text-white p-6 md:p-10 leading-relaxed\"\u003e\n      \u003cdiv className=\"max-w-4xl mx-auto space-y-8\"\u003e\n        \u003cheader className=\"md:my-10\"\u003e\n          \u003cTagsList tags={tags} /\u003e\n          \u003cCustomTitle headingClassName=\"!text-start\" heading={\u003c\u003e{${q(title)}}\u003c/\u003e} /\u003e\n          \u003cWriterInfo image={author.image} name={author.name} role={author.role} readTime={${q(d.readTime || \"8\")}} date=\"June 14, 2025\" /\u003e\n        \u003c/header\u003e${para(d.hero)}\n\n        \u003cBlogSubTitle\u003e{${q(d.conceptsTitle || \"Key Concepts Covered\")}}\u003c/BlogSubTitle\u003e\n        \u003cdiv className=\"flex flex-wrap gap-2\"\u003e\n            ${conceptChips}\n        \u003c/div\u003e\n        \u003cBlogList items={[\n              ${conceptItemsJsx}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eContext Setup\u003c/BlogSubTitle\u003e${para(d.context)}\n\n        \u003cBlogSubTitle\u003eProblem Breakdown\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.problem)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eSolution Overview\u003c/BlogSubTitle\u003e${para(d.solution)}\n${interleavedStepCode}${remainingStepsBlock}\n\n        \u003cBlogSubTitle\u003eBest Practices\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.best)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003ePro Tips\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.tips)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eResources\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n            ${resourceItems}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eFinal Thoughts\u003c/BlogSubTitle\u003e${para(d.finalThoughts)}\n\n        \u003cBlogTips title=\"Pro Tip\" description=\"Validate generated TSX before writing to disk.\" /\u003e\n        \u003cRelatedNextBlogButton currentSlug={pathname} currentTags={tags} /\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default ${component};\n`;\n\nreturn [{ json: { ...$json, tsx_file_content: tsx } }];"
+                                         "jsCode":  "const d = $json;\n\nconst q = (v) =\u003e JSON.stringify(String(v ?? \"\"));\nconst esc = (s) =\u003e String(s || \"\")\n  .replace(/\u0026/g, \"\u0026amp;\")\n  .replace(/\u003c/g, \"\u0026lt;\")\n  .replace(/\u003e/g, \"\u0026gt;\")\n  .replace(/\\{/g, \"\u0026#123;\")\n  .replace(/\\}/g, \"\u0026#125;\");\n\nconst para = (arr) =\u003e (arr || []).map((p) =\u003e `\\n        \u003cBlogContent\u003e{${q(p)}}\u003c/BlogContent\u003e`).join(\"\");\n\nconst ext = (lang) =\u003e {\n  const m = { typescript: \u0027ts\u0027, javascript: \u0027js\u0027, tsx: \u0027tsx\u0027, jsx: \u0027jsx\u0027, bash: \u0027sh\u0027, shell: \u0027sh\u0027, dart: \u0027dart\u0027, rust: \u0027rs\u0027, python: \u0027py\u0027, json: \u0027json\u0027, yaml: \u0027yml\u0027, toml: \u0027toml\u0027 };\n  const key = String(lang || \u0027txt\u0027).toLowerCase();\n  return m[key] || key.replace(/[^a-z0-9]/g, \u0027\u0027) || \u0027txt\u0027;\n};\n\nconst tokenize = (line, tokens) =\u003e {\n  if (!tokens || !tokens.length) return esc(line);\n  let out = esc(line);\n  tokens\n    .filter(Boolean)\n    .sort((a, b) =\u003e b.length - a.length)\n    .forEach((t) =\u003e {\n      const safe = t.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$\u0026\");\n      const re = new RegExp(`(${safe})`, \"g\");\n      out = out.replace(re, `\u003cBlogHighlighter\u003e$1\u003c/BlogHighlighter\u003e`);\n    });\n  return out;\n};\n\nconst conceptItemsJsx = (d.conceptItems || []).length\n  ? d.conceptItems.map((line, i) =\u003e `\u003cReact.Fragment key={${q(`ci-${i}`)}}\u003e${tokenize(line, d.highlightTokens || [])}\u003c/React.Fragment\u003e`).join(\",\\n              \")\n  : `\u003cReact.Fragment key=\\\"ci-0\\\"\u003eUse \u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e for browser APIs.\u003c/React.Fragment\u003e`;\n\nconst conceptChips = (d.highlightTokens || []).length\n  ? d.highlightTokens.map((t, i) =\u003e `\u003cspan key={${q(String(i))}} className=\\\"inline-flex\\\"\u003e\u003cBlogHighlighter\u003e${esc(t)}\u003c/BlogHighlighter\u003e\u003c/span\u003e`).join(\"\\n            \")\n  : `\u003cspan key=\\\"0\\\" className=\\\"inline-flex\\\"\u003e\u003cBlogHighlighter\u003eKeyTerm\u003c/BlogHighlighter\u003e\u003c/span\u003e`;\n\nconst resourceItems = (d.resources || []).length\n  ? d.resources.map((r, i) =\u003e `\u003cLink key={${q(String(i))}} href={${q(r.href)}} target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" className=\\\"text-sky-400 hover:text-sky-600\\\"\u003e${esc(r.label)}\u003c/Link\u003e`).join(\",\\n            \")\n  : `\u003cLink key=\\\"0\\\" href=\\\"https://developer.mozilla.org/\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\" className=\\\"text-sky-400 hover:text-sky-600\\\"\u003eOfficial Docs\u003c/Link\u003e`;\n\nconst stepItems = (d.steps || []).length ? d.steps : [\"Step 1: Implement solution\"];\nconst codeBlocks = d.codeBlocks || [];\nconst pairedCount = Math.min(stepItems.length, codeBlocks.length);\nconst interleavedStepCode = Array.from({ length: pairedCount }).map((_, i) =\u003e {\n  const step = stepItems[i];\n  const block = codeBlocks[i];\n  const stepTitle = String(step).replace(/^[-*\\s]+/, \"\").trim();\n  return `\\n        \u003cBlogSubTitle\u003e{${q(stepTitle)}}\u003c/BlogSubTitle\u003e\\n        \u003cCodeBlock\\n          language=${q(block.language || \"text\")}\\n          filename=${q(`snippet-${i + 1}.${ext(block.language)}`)}\\n          code={${q(block.code || \"\")}}\\n        /\u003e`;\n}).join(\"\\n\");\n\nconst remainingStepItems = stepItems.slice(pairedCount);\nconst remainingStepsBlock = remainingStepItems.length\n  ? `\\n        \u003cBlogSubTitle\u003eAdditional Implementation Notes\u003c/BlogSubTitle\u003e\\n        \u003cBlogList items={[\\n              ${remainingStepItems.map((x) =\u003e q(x)).join(\",\\n              \")}\\n        ]} /\u003e`\n  : \"\";\n\nconst listItems = (arr) =\u003e (arr \u0026\u0026 arr.length ? arr.map((x) =\u003e q(x)).join(\",\\n              \") : q(\"Topic-specific points are generated from research context.\"));\n\nconst title = d.title || \"Generated Blog\";\nconst component = d.componentName || \"GeneratedBlogPage\";\n\nconst tsx = `\"use client\";\nimport { BlogContent, BlogHighlighter, BlogList, BlogSubTitle, BlogTips, WriterInfo } from \"@/app/components/BlogComponents\";\nimport CustomTitle from \"@/components/custom/CustomTitle\";\nimport { CodeBlock } from \"@/components/ui/code-block\";\nimport { BLOG_AUTHORS, BLOG_PREVIEWS } from \"@/lib/constants\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport React from \"react\";\nimport RelatedNextBlogButton from \"@/app/components/RelatedNextBlogButton\";\nimport TagsList from \"@/components/custom/TagsList\";\n\nconst ${component} = () =\u003e {\n  const author = BLOG_AUTHORS[1];\n  const pathname = usePathname().split(\"/\")[2];\n  const tags = BLOG_PREVIEWS.find((blog) =\u003e blog.slug === pathname)?.tags || [];\n\n  return (\n    \u003cdiv className=\"min-h-screen text-white p-6 md:p-10 leading-relaxed\"\u003e\n      \u003cdiv className=\"max-w-4xl mx-auto space-y-8\"\u003e\n        \u003cheader className=\"md:my-10\"\u003e\n          \u003cTagsList tags={tags} /\u003e\n          \u003cCustomTitle headingClassName=\"!text-start\" heading={\u003c\u003e{${q(title)}}\u003c/\u003e} /\u003e\n          \u003cWriterInfo image={author.image} name={author.name} role={author.role} readTime={${q(d.readTime || \"8\")}} date=\"June 14, 2025\" /\u003e\n        \u003c/header\u003e${para(d.hero)}\n\n        \u003cBlogSubTitle\u003e{${q(d.conceptsTitle || \"Key Concepts Covered\")}}\u003c/BlogSubTitle\u003e\n        \u003cdiv className=\"flex flex-wrap gap-2\"\u003e\n            ${conceptChips}\n        \u003c/div\u003e\n        \u003cBlogList items={[\n              ${conceptItemsJsx}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eContext Setup\u003c/BlogSubTitle\u003e${para(d.context)}\n\n        \u003cBlogSubTitle\u003eProblem Breakdown\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.problem)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eSolution Overview\u003c/BlogSubTitle\u003e${para(d.solution)}\n${interleavedStepCode}${remainingStepsBlock}\n\n        \u003cBlogSubTitle\u003eBest Practices\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.best)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003ePro Tips\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n              ${listItems(d.tips)}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eResources\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n            ${resourceItems}\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eFinal Thoughts\u003c/BlogSubTitle\u003e${para(d.finalThoughts)}\n\n        \u003cBlogTips title=\"Pro Tip\" description=\"Validate generated TSX before writing to disk.\" /\u003e\n        \u003cRelatedNextBlogButton currentSlug={pathname} currentTags={tags} /\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default ${component};\n`;\n\nreturn [{ json: { ...$json, tsx_file_content: tsx } }];"
                                      },
                       "id":  "0d8f18d5-8ed4-4dc1-b2bb-434a4b870003",
-                      "name":  "Render TSX Template",
+                      "name":  "Step 3 - Render TSX Template",
                       "type":  "n8n-nodes-base.code",
                       "typeVersion":  2,
                       "position":  [
@@ -336,10 +328,10 @@
                   },
                   {
                       "parameters":  {
-                                         "jsCode":  "const code = ($json.tsx_file_content || \"\").toLowerCase();\nconst title = ($json.title || \"\").trim();\nconst slug = ($json.slug || \"\").trim();\nconst componentName = ($json.componentName || \"\").trim();\n\nconst errors = [];\n\nif (!code.includes(\u0027\"use client\";\u0027)) errors.push(\"Missing use client\");\nif (!/const\\s+[a-z0-9_]+\\s*=\\s*\\(\\)\\s*=\u003e/i.test(code)) errors.push(\"Missing component declaration\");\nif (!/export\\s+default\\s+[a-z0-9_]+;/i.test(code)) errors.push(\"Missing default export\");\nif (code.includes(\"d.title\")) errors.push(\"Unresolved template variable\");\nif ((code.match(/\\{/g) || []).length !== (code.match(/\\}/g) || []).length) errors.push(\"Unbalanced braces\");\nif ((code.match(/\\(/g) || []).length !== (code.match(/\\)/g) || []).length) errors.push(\"Unbalanced parentheses\");\n\nif (!title || !slug) errors.push(\"Missing title/slug extraction\");\nif (slug.toLowerCase() === \"generated-blog\") errors.push(\"Fallback slug in use\");\nif (componentName.toLowerCase() === \"generatedblogpage\") errors.push(\"Fallback component in use\");\nif (/not provided/i.test(code)) errors.push(\"Placeholder content present\");\n\nconst topicOk = code.includes(\"hydration\") \u0026\u0026 (code.includes(\"next.js\") || code.includes(\"nextjs\"));\nif (!topicOk) errors.push(\"Topic mismatch\");\n\nreturn [{ json: { ...$json, tsx_valid: errors.length === 0, tsx_errors: errors } }];"
+                                         "jsCode":  "const codeRaw = String($json.tsx_file_content || \"\");\nconst code = codeRaw.toLowerCase();\nconst title = String($json.title || \"\").trim();\nconst slug = String($json.slug || \"\").trim();\nconst componentName = String($json.componentName || \"\").trim();\n\nconst errors = [];\nif (!code.includes(\u0027\"use client\";\u0027)) errors.push(\"Missing use client\");\nif (!/const\\s+[a-z0-9_]+\\s*=\\s*\\(\\)\\s*=\u003e/i.test(code)) errors.push(\"Missing component declaration\");\nif (!/export\\s+default\\s+[a-z0-9_]+;/i.test(code)) errors.push(\"Missing default export\");\nif (code.includes(\"d.title\")) errors.push(\"Unresolved template variable\");\nif ((code.match(/\\{/g) || []).length !== (code.match(/\\}/g) || []).length) errors.push(\"Unbalanced braces\");\nif ((code.match(/\\(/g) || []).length !== (code.match(/\\)/g) || []).length) errors.push(\"Unbalanced parentheses\");\nif (!title || !slug) errors.push(\"Missing title/slug extraction\");\nif (slug.toLowerCase() === \"generated-blog\") errors.push(\"Fallback slug in use\");\n\nif (/not provided/i.test(code)) errors.push(\"Placeholder content present\");\n\nconst topic = String($json.topic || \"\").toLowerCase();\nconst research = String($json.research_context || \"\").toLowerCase();\nconst stop = new Set([\"how\",\"to\",\"use\",\"using\",\"with\",\"in\",\"for\",\"and\",\"the\",\"a\",\"an\",\"on\",\"of\",\"from\",\"guide\",\"tutorial\",\"overview\",\"basics\"]);\nconst topicTerms = [...new Set((topic.match(/[a-z0-9.+#-]+/g) || []).filter((w) =\u003e w.length \u003e= 3 \u0026\u0026 !stop.has(w)))].slice(0, 12);\nconst researchTerms = [...new Set((research.match(/[a-z0-9.+#-]+/g) || []).filter((w) =\u003e w.length \u003e= 4 \u0026\u0026 !stop.has(w)))].slice(0, 20);\nconst keys = [...new Set([...topicTerms, ...researchTerms])].slice(0, 14);\n\nconst snippetZone = ((codeRaw.match(/\u003cCodeBlock[\\s\\S]*?\\/\u003e/g) || []).join(\"\\n\")).toLowerCase();\nconst hits = (s) =\u003e keys.filter((k) =\u003e s.includes(k)).length;\n\nif (!keys.length) {\n  errors.push(\"Topic key terms missing\");\n} else {\n  const totalHits = hits(code);\n  const snippetHits = hits(snippetZone);\n  if (totalHits \u003c Math.min(4, keys.length)) errors.push(\"Topic mismatch: insufficient topic context across content\");\n  if (snippetHits \u003c 1) errors.push(\"Topic mismatch: code snippets not aligned with topic\");\n}\n\nreturn [{ json: { ...$json, tsx_valid: errors.length === 0, tsx_errors: errors } }];"
                                      },
                       "id":  "f0c1df86-cc52-44d7-8dc2-f1f9355f3004",
-                      "name":  "Validate TSX Output",
+                      "name":  "Step 3 - Validate TSX Output",
                       "type":  "n8n-nodes-base.code",
                       "typeVersion":  2,
                       "position":  [
@@ -354,7 +346,7 @@
                                                         "string":  [
                                                                        {
                                                                            "name":  "topic",
-                                                                           "value":  "={{$json.topic || $item(0).$node[\"Set Topic + Skill Content\"].json[\"topic\"]}}"
+                                                                           "value":  "={{$json.topic || $item(0).$node[\"Set Topic + Config\"].json[\"topic\"]}}"
                                                                        },
                                                                        {
                                                                            "name":  "tsx_slug",
@@ -385,7 +377,7 @@
                                                      }
                                      },
                       "id":  "2f54e3e2-2baf-4d5f-9f3d-11c8930ec005",
-                      "name":  "Deterministic TSX Output",
+                      "name":  "Step 3 - Deterministic TSX Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -398,7 +390,7 @@
                                          "jsCode":  "let s = $json.tsx_file_content || \"\";\ntry {\n  if (typeof s === \"string\" \u0026\u0026 s.startsWith(\u0027\"\u0027) \u0026\u0026 s.endsWith(\u0027\"\u0027)) s = JSON.parse(s);\n} catch (_) {}\nreturn [{ json: { ...$json, tsx_raw: s } }];"
                                      },
                       "id":  "c31a3e81-a89f-46e0-bec8-3ce8f2696001",
-                      "name":  "Decode TSX Raw",
+                      "name":  "Step 3 - Decode TSX Raw",
                       "type":  "n8n-nodes-base.code",
                       "typeVersion":  2,
                       "position":  [
@@ -411,7 +403,7 @@
                                          "conditions":  {
                                                             "boolean":  [
                                                                             {
-                                                                                "value1":  "={{ (() =\u003e { const s = String($json.tsx_raw || $json.tsx_file_content || \"\").toLowerCase(); const noPlaceholder = !s.includes(\"not provided\"); const topicOk = s.includes(\"hydration\") \u0026\u0026 (s.includes(\"next.js\") || s.includes(\"nextjs\")); const slugOk = String($json.tsx_slug || \"\").toLowerCase() !== \"generated-blog\"; const compOk = String($json.tsx_component_name || \"\").toLowerCase() !== \"generatedblogpage\"; return ($json.tsx_valid === true) \u0026\u0026 noPlaceholder \u0026\u0026 topicOk \u0026\u0026 slugOk \u0026\u0026 compOk; })() }}",
+                                                                                "value1":  "={{ (() =\u003e { const s = String($json.tsx_raw || $json.tsx_file_content || \"\").toLowerCase(); const noPlaceholder = !s.includes(\"not provided\"); const slugOk = String($json.tsx_slug || \"\").toLowerCase() !== \"generated-blog\"; return ($json.tsx_valid === true) \u0026\u0026 noPlaceholder \u0026\u0026 slugOk; })() }}",
                                                                                 "value2":  true
                                                                             }
                                                                         ]
@@ -421,7 +413,7 @@
                                                      }
                                      },
                       "id":  "d5f057f3-dd54-4273-9de6-5948f45862ee",
-                      "name":  "TSX Production Ready?",
+                      "name":  "Step 3 - TSX Production Ready?",
                       "type":  "n8n-nodes-base.if",
                       "typeVersion":  2,
                       "position":  [
@@ -465,7 +457,7 @@
                                                      }
                                      },
                       "id":  "e7bc3bb4-8fd8-4a2d-852d-2c13804d94fb",
-                      "name":  "Production Output",
+                      "name":  "Step 3 - Production Output",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -501,7 +493,7 @@
                                                      }
                                      },
                       "id":  "b27510c8-e842-48da-a6f9-bd191d42c85d",
-                      "name":  "Production Error",
+                      "name":  "Step 3 - Production Error",
                       "type":  "n8n-nodes-base.set",
                       "typeVersion":  2,
                       "position":  [
@@ -511,242 +503,450 @@
                   },
                   {
                       "parameters":  {
-                                         "jsCode":  "const topic = $json.topic || \"Understanding and Fixing Hydration Errors in Next.js\";\nconst tsx = `\"use client\";\nimport { BlogContent, BlogHighlighter, BlogList, BlogSubTitle, BlogTips, WriterInfo } from \"@/app/components/BlogComponents\";\nimport CustomTitle from \"@/components/custom/CustomTitle\";\nimport { CodeBlock } from \"@/components/ui/code-block\";\nimport { BLOG_AUTHORS, BLOG_PREVIEWS } from \"@/lib/constants\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport React from \"react\";\nimport RelatedNextBlogButton from \"@/app/components/RelatedNextBlogButton\";\nimport TagsList from \"@/components/custom/TagsList\";\n\nconst NextjsHydrationErrorsFixPage = () =\u003e {\n  const author = BLOG_AUTHORS[1];\n  const pathname = usePathname().split(\"/\")[2];\n  const tags = BLOG_PREVIEWS.find((blog) =\u003e blog.slug === pathname)?.tags || [];\n\n  return (\n    \u003cdiv className=\"min-h-screen text-white p-6 md:p-10 leading-relaxed\"\u003e\n      \u003cdiv className=\"max-w-4xl mx-auto space-y-8\"\u003e\n        \u003cheader className=\"md:my-10\"\u003e\n          \u003cTagsList tags={tags} /\u003e\n          \u003cCustomTitle headingClassName=\"!text-start\" heading={\u003c\u003e{\"Understanding and Fixing Hydration Errors in Next.js\"}\u003c/\u003e} /\u003e\n          \u003cWriterInfo image={author.image} name={author.name} role={author.role} readTime={\"8\"} date=\"June 14, 2025\" /\u003e\n        \u003c/header\u003e\n\n        \u003cBlogContent\u003e{\"Hydration errors happen when server-rendered HTML differs from the first client render.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogSubTitle\u003eKey Concepts Covered\u003c/BlogSubTitle\u003e\n        \u003cdiv className=\"flex flex-wrap gap-2\"\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003eHydration\u003c/BlogHighlighter\u003e\u003c/span\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e\u003c/span\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003edynamic import\u003c/BlogHighlighter\u003e\u003c/span\u003e\n        \u003c/div\u003e\n        \u003cBlogList items={[\n          \u003c\u003eUse \u003cBlogHighlighter\u003euseEffect\u003c/BlogHighlighter\u003e for browser-only APIs.\u003c/\u003e,\n          \u003c\u003eKeep server and client render output deterministic.\u003c/\u003e,\n          \u003c\u003eUse \u003cBlogHighlighter\u003essr: false\u003c/BlogHighlighter\u003e for browser-only widgets.\u003c/\u003e\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eContext Setup\u003c/BlogSubTitle\u003e\n        \u003cBlogContent\u003e{\"React hydration expects identical initial markup from server and client.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogSubTitle\u003eSolution Overview\u003c/BlogSubTitle\u003e\n        \u003cBlogContent\u003e{\"Fix mismatches by deferring browser-only logic and stabilizing first render.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogSubTitle\u003eStep 1: Move browser-only access to useEffect\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock\n          language=\"typescript\"\n          filename=\"snippet-1.tsx\"\n          code={`\"use client\";\nimport { useEffect, useState } from \"react\";\n\nexport default function WidthInfo() {\n  const [width, setWidth] = useState\u003cnumber | null\u003e(null);\n  useEffect(() =\u003e {\n    const update = () =\u003e setWidth(window.innerWidth);\n    update();\n    window.addEventListener(\"resize\", update);\n    return () =\u003e window.removeEventListener(\"resize\", update);\n  }, []);\n  return \u003cdiv\u003e{width === null ? \"Loading...\" : `Width: ${width}`}\u003c/div\u003e;\n}`}\n        /\u003e\n\n        \u003cBlogSubTitle\u003eStep 2: Isolate browser-only component with dynamic import\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock\n          language=\"typescript\"\n          filename=\"snippet-2.tsx\"\n          code={`import dynamic from \"next/dynamic\";\nconst Chart = dynamic(() =\u003e import(\"./Chart\"), { ssr: false });\nexport default function DashboardChart() { return \u003cChart /\u003e; }`}\n        /\u003e\n\n        \u003cBlogSubTitle\u003eBest Practices\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n          \"Keep initial render deterministic\",\n          \"Avoid window/document/localStorage in server render\",\n          \"Validate in production mode\"\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eResources\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\n          \u003cLink key=\"0\" href=\"https://nextjs.org/docs/messages/react-hydration-error\" target=\"_blank\" rel=\"noopener noreferrer\" className=\"text-sky-400 hover:text-sky-600\"\u003eNext.js Hydration Error Docs\u003c/Link\u003e\n        ]} /\u003e\n\n        \u003cBlogSubTitle\u003eFinal Thoughts\u003c/BlogSubTitle\u003e\n        \u003cBlogContent\u003e{\"Treat hydration warnings as architectural signals and fix root causes early.\"}\u003c/BlogContent\u003e\n\n        \u003cBlogTips title=\"Pro Tip\" description=\"Treat hydration warnings as release blockers for critical pages.\" /\u003e\n        \u003cRelatedNextBlogButton currentSlug={pathname} currentTags={tags} /\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default NextjsHydrationErrorsFixPage;\n`;\n\nreturn [{\n  json: {\n    ...$json,\n    topic,\n    tsx_slug: \"nextjs-hydration-errors-fix\",\n    tsx_component_name: \"NextjsHydrationErrorsFixPage\",\n    tsx_raw: tsx,\n    tsx_file_content: tsx,\n    tsx_valid: true,\n    tsx_errors_json: \"[]\",\n    generation_path: \"fallback_deterministic\"\n  }\n}];"
+                                         "jsCode":  "const topic = String($json.topic || \"Generated Technical Guide\");\nconst slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, \"-\").replace(/^-+|-+$/g, \"\") || \"generated-blog\";\nconst component = \"GeneratedBlogPage\";\n\nconst tsx = `\"use client\";\nimport { BlogContent, BlogHighlighter, BlogList, BlogSubTitle, BlogTips, WriterInfo } from \"@/app/components/BlogComponents\";\nimport CustomTitle from \"@/components/custom/CustomTitle\";\nimport { CodeBlock } from \"@/components/ui/code-block\";\nimport { BLOG_AUTHORS, BLOG_PREVIEWS } from \"@/lib/constants\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport React from \"react\";\nimport RelatedNextBlogButton from \"@/app/components/RelatedNextBlogButton\";\nimport TagsList from \"@/components/custom/TagsList\";\n\nconst ${component} = () =\u003e {\n  const author = BLOG_AUTHORS[1];\n  const pathname = usePathname().split(\"/\")[2];\n  const tags = BLOG_PREVIEWS.find((blog) =\u003e blog.slug === pathname)?.tags || [];\n\n  return (\n    \u003cdiv className=\"min-h-screen text-white p-6 md:p-10 leading-relaxed\"\u003e\n      \u003cdiv className=\"max-w-4xl mx-auto space-y-8\"\u003e\n        \u003cheader className=\"md:my-10\"\u003e\n          \u003cTagsList tags={tags} /\u003e\n          \u003cCustomTitle headingClassName=\"!text-start\" heading={\u003c\u003e{${JSON.stringify(topic)}}\u003c/\u003e} /\u003e\n          \u003cWriterInfo image={author.image} name={author.name} role={author.role} readTime={\"8\"} date=\"June 14, 2025\" /\u003e\n        \u003c/header\u003e\n\n        \u003cBlogSubTitle\u003eKey Concepts Covered\u003c/BlogSubTitle\u003e\n        \u003cdiv className=\"flex flex-wrap gap-2\"\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003eCore Setup\u003c/BlogHighlighter\u003e\u003c/span\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003eImplementation\u003c/BlogHighlighter\u003e\u003c/span\u003e\n          \u003cspan className=\"inline-flex\"\u003e\u003cBlogHighlighter\u003eValidation\u003c/BlogHighlighter\u003e\u003c/span\u003e\n        \u003c/div\u003e\n\n        \u003cBlogSubTitle\u003eStep 1: Setup\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock language=\"dart\" filename=\"snippet-1.dart\" code={\"// setup snippet\"} /\u003e\n        \u003cBlogSubTitle\u003eStep 2: Implement\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock language=\"dart\" filename=\"snippet-2.dart\" code={\"// implementation snippet\"} /\u003e\n        \u003cBlogSubTitle\u003eStep 3: Validate\u003c/BlogSubTitle\u003e\n        \u003cCodeBlock language=\"dart\" filename=\"snippet-3.dart\" code={\"// validation snippet\"} /\u003e\n\n        \u003cBlogSubTitle\u003eBest Practices\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\"Keep code concise\", \"Handle edge cases\", \"Validate output\"]} /\u003e\n\n        \u003cBlogSubTitle\u003eResources\u003c/BlogSubTitle\u003e\n        \u003cBlogList items={[\u003cLink key=\"0\" href=\"https://nextjs.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\" className=\"text-sky-400 hover:text-sky-600\"\u003eOfficial Docs\u003c/Link\u003e]} /\u003e\n\n        \u003cBlogTips title=\"Pro Tip\" description=\"Validate generated TSX before writing to disk.\" /\u003e\n        \u003cRelatedNextBlogButton currentSlug={pathname} currentTags={tags} /\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default ${component};\n`;\n\nreturn [{ json: { ...$json, topic, tsx_slug: slug, tsx_component_name: component, tsx_raw: tsx, tsx_file_content: tsx, tsx_valid: true, tsx_errors_json: \"[]\", generation_path: \"fallback_deterministic\" } }];"
                                      },
                       "id":  "a0f2e0a2-72a8-4540-b24b-145f0d4e7001",
-                      "name":  "Fallback Hydration TSX",
+                      "name":  "Step 3 - Fallback Generic TSX",
                       "type":  "n8n-nodes-base.code",
                       "typeVersion":  2,
                       "position":  [
                                        16208,
                                        -1120
                                    ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "let s = $json.tsx_file_content || $json.code || \"\";\n\nfor (let i = 0; i \u003c 5; i++) {\n  if (typeof s === \"string\" \u0026\u0026 s.startsWith(\u0027\"\u0027) \u0026\u0026 s.endsWith(\u0027\"\u0027)) {\n    try {\n      s = JSON.parse(s);\n      continue;\n    } catch {}\n  }\n  break;\n}\n\ns = String(s).replace(/\\r\\n/g, \"\\n\");\n\nconst fileName = `${$json.tsx_component_name || \"GeneratedBlogPage\"}.tsx`;\nconst filePath = `C:\\\\Users\\\\amank\\\\Desktop\\\\blog automation\\\\gigawave_web_showcase\\\\app\\\\blogs\\\\${$json.tsx_slug}\\\\components\\\\${fileName}`;\n\nreturn [\n  {\n    json: { fileName, filePath },\n    binary: {\n      data: {\n        data: Buffer.from(s, \"utf8\").toString(\"base64\"),\n        fileName,\n        mimeType: \"text/plain\"\n      }\n    }\n  }\n];"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -187776,
+                                       22352
+                                   ],
+                      "id":  "de97e55e-2ce8-4c53-a034-fa6afced250a",
+                      "name":  "Step 3 - Build TSX File"
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const topic = String($json.topic || \"\").trim();\nconst t = topic.toLowerCase();\nconst words = (t.match(/[a-z0-9.+#-]+/g) || []).filter(Boolean);\nconst stop = new Set([\"how\",\"to\",\"use\",\"using\",\"with\",\"in\",\"for\",\"and\",\"the\",\"a\",\"an\",\"on\",\"of\",\"from\",\"guide\",\"tutorial\"]);\nconst keyTerms = [...new Set(words.filter(w =\u003e w.length \u003e= 3 \u0026\u0026 !stop.has(w)))].slice(0, 12);\n\nconst official = [];\nconst add = (label, url) =\u003e official.push({ label, url });\nif (t.includes(\"flutter\") || t.includes(\"dart\")) {\n  add(\"Flutter Docs\", \"https://docs.flutter.dev/\");\n  add(\"Flutter API\", \"https://api.flutter.dev/\");\n  add(\"Dart Language\", \"https://dart.dev/guides\");\n  add(\"pub.dev\", \"https://pub.dev/\");\n}\nif (t.includes(\"dio\")) add(\"Dio Package\", \"https://pub.dev/packages/dio\");\nif (t.includes(\"tab\") \u0026\u0026 t.includes(\"bar\")) {\n  add(\"TabController\", \"https://api.flutter.dev/flutter/material/TabController-class.html\");\n  add(\"TabBar\", \"https://api.flutter.dev/flutter/material/TabBar-class.html\");\n  add(\"TabBarView\", \"https://api.flutter.dev/flutter/material/TabBarView-class.html\");\n}\nif (t.includes(\"animation\")) {\n  add(\"Flutter Animations\", \"https://docs.flutter.dev/ui/animations\");\n  add(\"AnimationController\", \"https://api.flutter.dev/flutter/animation/AnimationController-class.html\");\n}\nif (t.includes(\"next\") || t.includes(\"react\")) {\n  add(\"Next.js Docs\", \"https://nextjs.org/docs\");\n  add(\"React Docs\", \"https://react.dev/\");\n}\nif (t.includes(\"node\") || t.includes(\"express\") || t.includes(\"javascript\")) {\n  add(\"Node.js Docs\", \"https://nodejs.org/en/docs\");\n  add(\"MDN JavaScript\", \"https://developer.mozilla.org/en-US/docs/Web/JavaScript\");\n}\nif (t.includes(\"python\") || t.includes(\"django\") || t.includes(\"fastapi\")) {\n  add(\"Python Docs\", \"https://docs.python.org/3/\");\n  add(\"FastAPI Docs\", \"https://fastapi.tiangolo.com/\");\n  add(\"Django Docs\", \"https://docs.djangoproject.com/\");\n}\nif (!official.length) {\n  add(\"MDN Web Docs\", \"https://developer.mozilla.org/\");\n  add(\"W3C\", \"https://www.w3.org/\");\n}\n\nconst seen = new Set();\nconst officialUnique = official.filter((s) =\u003e {\n  const u = String(s.url || \"\").trim();\n  if (!u || seen.has(u)) return false;\n  seen.add(u);\n  return true;\n});\n\nconst officialLinksMd = officialUnique.map((s, i) =\u003e `${i + 1}. [${s.label}](${s.url})`).join(\"\\n\");\n\nreturn [{ json: { ...$json, research_key_terms: keyTerms, official_sources: officialUnique, official_sources_md: officialLinksMd } }];"
+                                     },
+                      "id":  "build-topic-research-pack",
+                      "name":  "Step 1 - Build Topic Research Pack",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -192192,
+                                       22464
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "=https://api.cloudflare.com/client/v4/accounts/0d2f243a5a2cb5e95d5e1dfe8b9091ab/ai/run/@cf/moonshotai/kimi-k2.5",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Authorization",
+                                                                                         "value":  "=Bearer cfut_h8fOeqxkOkirHlNJbwzbdyBLtduCpFsukOX5qOQlafa85482"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "={\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a technical research planner. Use only TOPIC + OFFICIAL_SOURCES links. Do not require full page content input. Return exact sections: [GW_TOPIC_OVERVIEW], [GW_OFFICIAL_DOCS], [GW_REFERENCES], [GW_KEY_TERMS], [GW_EXTRACTION_PLAN]. In GW_EXTRACTION_PLAN, specify exactly what to extract from each official link (prerequisites, setup steps, code/API usage, pitfalls, validation checks, best practices).\"\n    },\n    { \"role\": \"user\", \"content\": \"TOPIC:\\\\n{{ JSON.stringify(($json.topic || \u0027\u0027).slice(0,220)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"OFFICIAL_SOURCES:\\\\n{{ JSON.stringify(($json.official_sources_md || \u0027\u0027).slice(0,1200)).slice(1,-1) }}\" }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 1400,\n  \"chat_template_kwargs\": { \"enable_thinking\": false, \"clear_thinking\": false },\n  \"stream\": false\n}",
+                                         "options":  {
+                                                         "timeout":  180000
+                                                     }
+                                     },
+                      "id":  "call-kimi-topic-research",
+                      "name":  "Step 1 - Call Kimi Topic Research",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       -191952,
+                                       22464
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const parseOut = (root) =\u003e {\n  try {\n    const r = (typeof root === \"string\") ? JSON.parse(root) : root;\n    const payload = (typeof r?.result === \"string\") ? JSON.parse(r.result) : (r?.result || r);\n    return payload?.choices?.[0]?.message?.content || payload?.response || payload?.output_text || \"\";\n  } catch { return \"\"; }\n};\n\nconst clip = (v, n) =\u003e String(v || \"\").replace(/\\s+/g, \" \").trim().slice(0, n);\n\nconst research_context = clip(parseOut($json), 4500);\nconst cfg = $item(0).$node[\"Set Topic + Config\"].json;\nconst refs = $item(0).$node[\"Step 1 - Fetch Reference Content\"].json;\n\nreturn [{\n  json: {\n    ...$json,\n    topic: clip(cfg.topic, 220),\n    target_model: clip(cfg.target_model, 120),\n    cloudflare_account_id: clip(cfg.cloudflare_account_id, 120),\n    cloudflare_auth_token: clip(cfg.cloudflare_auth_token, 240),\n    skill_file_content: clip(cfg.skill_file_content, 6000),\n    official_sources: refs.official_sources || [],\n    official_sources_md: clip(refs.official_sources_md, 1200),\n    discovered_references: refs.discovered_references || [],\n    discovered_references_md: clip(refs.discovered_references_md, 1200),\n    reference_content_md: clip(refs.reference_content_md, 2500),\n    research_context,\n  }\n}];"
+                                     },
+                      "id":  "extract-research-output",
+                      "name":  "Step 1 - Extract Research Output",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -191712,
+                                       22464
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const parseOut = (root) =\u003e {\n  try {\n    const r = (typeof root === \"string\") ? JSON.parse(root) : root;\n    const payload = (typeof r?.result === \"string\") ? JSON.parse(r.result) : (r?.result || r);\n    return payload?.choices?.[0]?.message?.content || payload?.response || payload?.output_text || \"\";\n  } catch { return \"\"; }\n};\n\nconst raw = String(parseOut($json) || \"\").trim();\nconst cfg = $item(0).$node[\"Set Topic + Config\"].json;\n\nconst links = [];\nconst md = /\\[[^\\]]+\\]\\((https?:\\/\\/[^)\\s]+)\\)/g;\nlet m;\nwhile ((m = md.exec(raw)) !== null) links.push(m[1]);\nconst plain = /(https?:\\/\\/[\\w\\-._~:/?#\\[\\]@!$\u0026\u0027()*+,;=%]+)/g;\nwhile ((m = plain.exec(raw)) !== null) links.push(m[1]);\n\nconst official = ($item(0).$node[\"Step 1 - Build Topic Research Pack\"].json[\"official_sources\"] || []).map(x =\u003e x.url).filter(Boolean);\nconst merged = [...official, ...links].map(x =\u003e String(x).trim());\nconst uniq = [...new Set(merged)].slice(0, 6);\nconst references_md = uniq.map((u, i) =\u003e `${i + 1}. ${u}`).join(\"\\n\");\n\nreturn [{\n  json: {\n    topic: String(cfg.topic || \"\"),\n    skill_file_content: String(cfg.skill_file_content || \"\"),\n    target_model: String(cfg.target_model || \"\"),\n    cloudflare_account_id: String(cfg.cloudflare_account_id || \"\"),\n    cloudflare_auth_token: String(cfg.cloudflare_auth_token || \"\"),\n    official_sources: ($item(0).$node[\"Step 1 - Build Topic Research Pack\"].json[\"official_sources\"] || []),\n    official_sources_md: String($item(0).$node[\"Step 1 - Build Topic Research Pack\"].json[\"official_sources_md\"] || \"\"),\n    discovered_references: uniq,\n    discovered_references_md: references_md,\n    discovery_raw: raw.slice(0, 1800),\n  }\n}];"
+                                     },
+                      "id":  "step1-extract-topic-references",
+                      "name":  "Step 1 - Extract Topic References",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -191520,
+                                       22464
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const refs = Array.isArray($json.discovered_references) ? $json.discovered_references : [];\nconst picked = refs.slice(0, 8);\nconst topic = String($json.topic || \"\").trim();\n\nconst extractionChecklist = [\n  \"definition and core concepts\",\n  \"prerequisites and environment requirements\",\n  \"official setup/installation/implementation steps\",\n  \"recommended code/API usage patterns\",\n  \"error handling and common pitfalls\",\n  \"validation/testing checklist\",\n  \"best practices and production notes\"\n];\n\nconst reference_content_md = [\n  `Topic: ${topic}`,\n  \"Use links below as primary factual sources.\",\n  \"For each link, extract only high-signal sections:\",\n  ...extractionChecklist.map((x, i) =\u003e `${i + 1}. ${x}`),\n  \"\",\n  ...picked.map((u, i) =\u003e `Ref ${i + 1}: ${u}`)\n].join(\"\\n\").slice(0, 3000);\n\nreturn [{\n  json: {\n    ...$json,\n    reference_contents: picked.map((url) =\u003e ({ url, content: \"LINK_ONLY\" })),\n    reference_content_md,\n  }\n}];"
+                                     },
+                      "id":  "step1-fetch-reference-content",
+                      "name":  "Step 1 - Fetch Reference Content",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -191296,
+                                       22464
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "=https://api.cloudflare.com/client/v4/accounts/0d2f243a5a2cb5e95d5e1dfe8b9091ab/ai/run/@cf/moonshotai/kimi-k2.5",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Authorization",
+                                                                                         "value":  "=Bearer cfut_h8fOeqxkOkirHlNJbwzbdyBLtduCpFsukOX5qOQlafa85482"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "={\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a technical context synthesizer. Work from TOPIC + OFFICIAL_SOURCES + DISCOVERED_REFERENCES + EXTRACTION_PLAN. Do not require full webpage dumps in input. Produce concise, topic-specific outputs with exact sections: [GW_RESEARCH_SUMMARY], [GW_TOPIC_CONTENT], [GW_KEY_TERMS], [GW_IMPLEMENTATION_POINTS], [GW_PITFALLS], [GW_OFFICIAL_DOCS], [GW_REFERENCES]. Ensure every point maps to the provided official links.\"\n    },\n    { \"role\": \"user\", \"content\": \"TOPIC:\\\\n{{ JSON.stringify(($json.topic || \u0027\u0027).slice(0,220)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"OFFICIAL_SOURCES:\\\\n{{ JSON.stringify(($json.official_sources_md || \u0027\u0027).slice(0,1200)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"DISCOVERED_REFERENCES:\\\\n{{ JSON.stringify(($json.discovered_references_md || \u0027\u0027).slice(0,1400)).slice(1,-1) }}\" },\n    { \"role\": \"user\", \"content\": \"EXTRACTION_PLAN:\\\\n{{ JSON.stringify(($json.reference_content_md || \u0027\u0027).slice(0,2200)).slice(1,-1) }}\" }\n  ],\n  \"temperature\": 0,\n  \"top_p\": 0.1,\n  \"max_completion_tokens\": 1400,\n  \"chat_template_kwargs\": { \"enable_thinking\": false, \"clear_thinking\": false },\n  \"stream\": false\n}",
+                                         "options":  {
+                                                         "timeout":  180000
+                                                     }
+                                     },
+                      "id":  "step1-call-kimi-topic-context-synthesis",
+                      "name":  "Step 1 - Call Kimi Topic Context Synthesis",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       -191072,
+                                       22464
+                                   ]
                   }
               ],
     "connections":  {
-                        "Use Initial Output":  {
+                        "Step 2 - Use Initial Output":  {
+                                                            "main":  [
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Step 2 - Final Output",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                                     ]
+                                                        },
+                        "Step 2 - Extract Retry Output":  {
+                                                              "main":  [
+                                                                           [
+                                                                               {
+                                                                                   "node":  "Step 2 - Final Output",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
+                                                                       ]
+                                                          },
+                        "Step 2 - Retry Kimi K2.5 (Uses Skill + Research)":  {
+                                                                                 "main":  [
+                                                                                              [
+                                                                                                  {
+                                                                                                      "node":  "Step 2 - Extract Retry Output",
+                                                                                                      "type":  "main",
+                                                                                                      "index":  0
+                                                                                                  }
+                                                                                              ]
+                                                                                          ]
+                                                                             },
+                        "Step 2 - Schema Valid?":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Step 2 - Use Initial Output",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ],
+                                                                    [
+                                                                        {
+                                                                            "node":  "Step 2 - Retry Kimi K2.5 (Uses Skill + Research)",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Step 2 - Validate Tag Schema":  {
+                                                             "main":  [
+                                                                          [
+                                                                              {
+                                                                                  "node":  "Step 2 - Schema Valid?",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              }
+                                                                          ]
+                                                                      ]
+                                                         },
+                        "Step 2 - Extract Exact Blog Output":  {
+                                                                   "main":  [
+                                                                                [
+                                                                                    {
+                                                                                        "node":  "Step 2 - Validate Tag Schema",
+                                                                                        "type":  "main",
+                                                                                        "index":  0
+                                                                                    }
+                                                                                ]
+                                                                            ]
+                                                               },
+                        "Step 2 - Format Output":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Step 2 - Extract Exact Blog Output",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Step 2 - Call Kimi K2.5 (Uses Skill + Research)":  {
+                                                                                "main":  [
+                                                                                             [
+                                                                                                 {
+                                                                                                     "node":  "Step 2 - Format Output",
+                                                                                                     "type":  "main",
+                                                                                                     "index":  0
+                                                                                                 }
+                                                                                             ]
+                                                                                         ]
+                                                                            },
+                        "Manual Trigger":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Set Topic + Config",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "Step 2 - Final Output":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Step 3 - Parse GW Tags",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                               ]
+                                                  },
+                        "Step 3 - Parse GW Tags":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Step 3 - Map Tags To TSX Model",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Step 3 - Map Tags To TSX Model":  {
+                                                               "main":  [
+                                                                            [
+                                                                                {
+                                                                                    "node":  "Step 3 - Render TSX Template",
+                                                                                    "type":  "main",
+                                                                                    "index":  0
+                                                                                }
+                                                                            ]
+                                                                        ]
+                                                           },
+                        "Step 3 - Render TSX Template":  {
+                                                             "main":  [
+                                                                          [
+                                                                              {
+                                                                                  "node":  "Step 3 - Validate TSX Output",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              }
+                                                                          ]
+                                                                      ]
+                                                         },
+                        "Step 3 - Validate TSX Output":  {
+                                                             "main":  [
+                                                                          [
+                                                                              {
+                                                                                  "node":  "Step 3 - Deterministic TSX Output",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              }
+                                                                          ]
+                                                                      ]
+                                                         },
+                        "Step 3 - Deterministic TSX Output":  {
+                                                                  "main":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Step 3 - Decode TSX Raw",
+                                                                                       "type":  "main",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                              },
+                        "Step 3 - Decode TSX Raw":  {
+                                                        "main":  [
+                                                                     [
+                                                                         {
+                                                                             "node":  "Step 3 - TSX Production Ready?",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
+                                                                 ]
+                                                    },
+                        "Step 3 - TSX Production Ready?":  {
+                                                               "main":  [
+                                                                            [
+                                                                                {
+                                                                                    "node":  "Step 3 - Production Output",
+                                                                                    "type":  "main",
+                                                                                    "index":  0
+                                                                                }
+                                                                            ],
+                                                                            [
+                                                                                {
+                                                                                    "node":  "Step 3 - Fallback Generic TSX",
+                                                                                    "type":  "main",
+                                                                                    "index":  0
+                                                                                }
+                                                                            ]
+                                                                        ]
+                                                           },
+                        "Step 3 - Fallback Generic TSX":  {
+                                                              "main":  [
+                                                                           [
+                                                                               {
+                                                                                   "node":  "Step 3 - Production Output",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
+                                                                       ]
+                                                          },
+                        "Step 3 - Production Output":  {
+                                                           "main":  [
+                                                                        [
+                                                                            {
+                                                                                "node":  "Step 3 - Build TSX File",
+                                                                                "type":  "main",
+                                                                                "index":  0
+                                                                            }
+                                                                        ]
+                                                                    ]
+                                                       },
+                        "Set Topic + Config":  {
                                                    "main":  [
                                                                 [
                                                                     {
-                                                                        "node":  "Final Output",
+                                                                        "node":  "Step 1 - Build Topic Research Pack",
                                                                         "type":  "main",
                                                                         "index":  0
                                                                     }
                                                                 ]
                                                             ]
                                                },
-                        "Extract Retry Output":  {
-                                                     "main":  [
-                                                                  [
-                                                                      {
-                                                                          "node":  "Final Output",
-                                                                          "type":  "main",
-                                                                          "index":  0
-                                                                      }
-                                                                  ]
-                                                              ]
-                                                 },
-                        "Call Kimi K2.5 Retry":  {
-                                                     "main":  [
-                                                                  [
-                                                                      {
-                                                                          "node":  "Extract Retry Output",
-                                                                          "type":  "main",
-                                                                          "index":  0
-                                                                      }
-                                                                  ]
-                                                              ]
-                                                 },
-                        "Schema Valid?":  {
-                                              "main":  [
-                                                           [
-                                                               {
-                                                                   "node":  "Use Initial Output",
-                                                                   "type":  "main",
-                                                                   "index":  0
-                                                               }
-                                                           ],
-                                                           [
-                                                               {
-                                                                   "node":  "Call Kimi K2.5 Retry",
-                                                                   "type":  "main",
-                                                                   "index":  0
-                                                               }
-                                                           ]
-                                                       ]
-                                          },
-                        "Validate Tag Schema":  {
-                                                    "main":  [
-                                                                 [
-                                                                     {
-                                                                         "node":  "Schema Valid?",
-                                                                         "type":  "main",
-                                                                         "index":  0
-                                                                     }
-                                                                 ]
-                                                             ]
-                                                },
-                        "Extract Exact Blog Output":  {
-                                                          "main":  [
-                                                                       [
-                                                                           {
-                                                                               "node":  "Validate Tag Schema",
-                                                                               "type":  "main",
-                                                                               "index":  0
-                                                                           }
-                                                                       ]
-                                                                   ]
-                                                      },
-                        "Format Output":  {
-                                              "main":  [
-                                                           [
-                                                               {
-                                                                   "node":  "Extract Exact Blog Output",
-                                                                   "type":  "main",
-                                                                   "index":  0
-                                                               }
-                                                           ]
-                                                       ]
-                                          },
-                        "Call Kimi K2.5":  {
-                                               "main":  [
-                                                            [
-                                                                {
-                                                                    "node":  "Format Output",
-                                                                    "type":  "main",
-                                                                    "index":  0
-                                                                }
-                                                            ]
-                                                        ]
-                                           },
-                        "Set Topic + Skill Content":  {
-                                                          "main":  [
-                                                                       [
-                                                                           {
-                                                                               "node":  "Call Kimi K2.5",
-                                                                               "type":  "main",
-                                                                               "index":  0
-                                                                           }
-                                                                       ]
-                                                                   ]
-                                                      },
-                        "Manual Trigger":  {
-                                               "main":  [
-                                                            [
-                                                                {
-                                                                    "node":  "Set Topic + Skill Content",
-                                                                    "type":  "main",
-                                                                    "index":  0
-                                                                }
-                                                            ]
-                                                        ]
-                                           },
-                        "Final Output":  {
-                                             "main":  [
-                                                          [
-                                                              {
-                                                                  "node":  "Parse GW Tags",
-                                                                  "type":  "main",
-                                                                  "index":  0
-                                                              }
-                                                          ]
-                                                      ]
-                                         },
-                        "Parse GW Tags":  {
-                                              "main":  [
-                                                           [
-                                                               {
-                                                                   "node":  "Map Tags To TSX Model",
-                                                                   "type":  "main",
-                                                                   "index":  0
-                                                               }
-                                                           ]
-                                                       ]
-                                          },
-                        "Map Tags To TSX Model":  {
-                                                      "main":  [
-                                                                   [
-                                                                       {
-                                                                           "node":  "Render TSX Template",
-                                                                           "type":  "main",
-                                                                           "index":  0
-                                                                       }
-                                                                   ]
-                                                               ]
-                                                  },
-                        "Render TSX Template":  {
-                                                    "main":  [
-                                                                 [
-                                                                     {
-                                                                         "node":  "Validate TSX Output",
-                                                                         "type":  "main",
-                                                                         "index":  0
-                                                                     }
-                                                                 ]
-                                                             ]
-                                                },
-                        "Validate TSX Output":  {
-                                                    "main":  [
-                                                                 [
-                                                                     {
-                                                                         "node":  "Deterministic TSX Output",
-                                                                         "type":  "main",
-                                                                         "index":  0
-                                                                     }
-                                                                 ]
-                                                             ]
-                                                },
-                        "Deterministic TSX Output":  {
-                                                         "main":  [
-                                                                      [
-                                                                          {
-                                                                              "node":  "Decode TSX Raw",
-                                                                              "type":  "main",
-                                                                              "index":  0
-                                                                          }
-                                                                      ]
-                                                                  ]
-                                                     },
-                        "Decode TSX Raw":  {
-                                               "main":  [
-                                                            [
-                                                                {
-                                                                    "node":  "TSX Production Ready?",
-                                                                    "type":  "main",
-                                                                    "index":  0
-                                                                }
-                                                            ]
-                                                        ]
-                                           },
-                        "TSX Production Ready?":  {
-                                                      "main":  [
-                                                                   [
-                                                                       {
-                                                                           "node":  "Production Output",
-                                                                           "type":  "main",
-                                                                           "index":  0
-                                                                       }
-                                                                   ],
-                                                                   [
-                                                                       {
-                                                                           "node":  "Fallback Hydration TSX",
-                                                                           "type":  "main",
-                                                                           "index":  0
-                                                                       }
-                                                                   ]
-                                                               ]
-                                                  },
-                        "Fallback Hydration TSX":  {
-                                                       "main":  [
-                                                                    [
-                                                                        {
-                                                                            "node":  "Production Output",
-                                                                            "type":  "main",
-                                                                            "index":  0
-                                                                        }
-                                                                    ]
-                                                                ]
-                                                   }
+                        "Step 1 - Build Topic Research Pack":  {
+                                                                   "main":  [
+                                                                                [
+                                                                                    {
+                                                                                        "node":  "Step 1 - Call Kimi Topic Research",
+                                                                                        "type":  "main",
+                                                                                        "index":  0
+                                                                                    }
+                                                                                ]
+                                                                            ]
+                                                               },
+                        "Step 1 - Call Kimi Topic Research":  {
+                                                                  "main":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Step 1 - Extract Topic References",
+                                                                                       "type":  "main",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                              },
+                        "Step 1 - Extract Topic References":  {
+                                                                  "main":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Step 1 - Fetch Reference Content",
+                                                                                       "type":  "main",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                              },
+                        "Step 1 - Fetch Reference Content":  {
+                                                                 "main":  [
+                                                                              [
+                                                                                  {
+                                                                                      "node":  "Step 1 - Call Kimi Topic Context Synthesis",
+                                                                                      "type":  "main",
+                                                                                      "index":  0
+                                                                                  }
+                                                                              ]
+                                                                          ]
+                                                             },
+                        "Step 1 - Call Kimi Topic Context Synthesis":  {
+                                                                           "main":  [
+                                                                                        [
+                                                                                            {
+                                                                                                "node":  "Step 1 - Extract Research Output",
+                                                                                                "type":  "main",
+                                                                                                "index":  0
+                                                                                            }
+                                                                                        ]
+                                                                                    ]
+                                                                       },
+                        "Step 1 - Extract Research Output":  {
+                                                                 "main":  [
+                                                                              [
+                                                                                  {
+                                                                                      "node":  "Step 2 - Call Kimi K2.5 (Uses Skill + Research)",
+                                                                                      "type":  "main",
+                                                                                      "index":  0
+                                                                                  }
+                                                                              ]
+                                                                          ]
+                                                             }
                     },
     "settings":  {
 
