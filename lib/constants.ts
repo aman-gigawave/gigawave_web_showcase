@@ -1,4 +1,4 @@
-import {
+﻿import {
   BlogAuthors,
   BlogPreview,
   ProjectInfoType,
@@ -183,6 +183,16 @@ export const BLOG_PREVIEWS: BlogPreview[] = [
     readTime: "4",
     tags: ["Flutter", "FFmpeg", "Video Processing"],
     slug: "flutter-merge-videos-ffmpegkit",
+  },
+  {
+    title: "Mastering ListView.builder and GridView.builder in Flutter",
+    description:
+      "Learn to implement efficient ListView.builder and GridView.builder in Flutter with practical code examples, performance tips, and production-ready patterns.",
+    authorId: "1",
+    date: "April 9, 2026",
+    readTime: "8",
+    tags: ["Flutter", "ListView", "GridView", "Performance", "Dart"],
+    slug: "flutter-listview-gridview-builder-implementation",
   },
 ];
 
@@ -519,3 +529,4 @@ export const PROJECTS: ProjectInfoType[] = [
     status: "ONGOING",
   },
 ];
+
