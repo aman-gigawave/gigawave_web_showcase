@@ -223,6 +223,16 @@ export const BLOG_PREVIEWS: BlogPreview[] = [
     tags: ["CHANGE_THIS_TOPIC_EACH_RUN"],
     slug: "change-this-topic-each-run-20260410115619",
   },
+  {
+    title: "how to download flutter in windows 11",
+    description:
+      "how to download flutter in windows 11",
+    authorId: "1",
+    date: "April 9, 2026",
+    readTime: "8",
+    tags: ["how", "to", "download", "flutter", "in"],
+    slug: "download-flutter-windows-11",
+  },
 
 ];
 
